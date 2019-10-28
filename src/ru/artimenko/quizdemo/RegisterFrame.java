@@ -5,11 +5,14 @@ import java.awt.*;
 public class RegisterFrame  {
     public static void main(String[] args) {
         TeacherFrame registerTest = new TeacherFrame("Register");
-        RegisterTest(registerTest);
-        RegisterTeacher(registerTest);
+        Button btnStudent = new Button("Student");
+        Button btnTeacher = new Button("Teacher");
+        Button btnRegister = new Button("Register");
+        RegisterTest(registerTest, btnStudent, btnTeacher, btnRegister);
+        //if (btnTeacher );
 
     }
-    public static void RegisterTest(TeacherFrame registerTest){
+    public static void RegisterTest(TeacherFrame registerTest, Button btnStudent, Button btnTeacher, Button btnRegister){
 
         Panel pnlRegister = new Panel();
         Panel pnlInputStudent = new Panel();
@@ -17,9 +20,6 @@ public class RegisterFrame  {
         TextArea txtSurname = new TextArea();
         TextArea txtPassword = new TextArea();
         TextArea txtClassID = new TextArea();
-        Button btnStudent = new Button("Student");
-        Button btnTeacher = new Button("Teacher");
-        Button btnRegister = new Button("Register");
 
         pnlRegister.add(btnStudent);
         pnlRegister.add(btnTeacher);
@@ -36,13 +36,10 @@ public class RegisterFrame  {
         registerTest.add(pnlInputStudent, BorderLayout.CENTER);
         registerTest.add(btnRegister, BorderLayout.SOUTH);
     }
-    public static void registerTeacher(TeacherFrame registerTest) {
+    public static void registerTeacher(TeacherFrame registerTest, Button btnStudent, Button btnTeacher, Button btnRegister) {
 
         Panel pnlRegister = new Panel();
         Panel pnlInputTeacher = new Panel();
-        Button btnStudent = new Button("Student");
-        Button btnTeacher = new Button("Teacher");
-        Button btnRegister = new Button("Register");
         TextArea txtName = new TextArea();
         TextArea txtSurname = new TextArea();
         TextArea txtPassword = new TextArea();
