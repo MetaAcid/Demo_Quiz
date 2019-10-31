@@ -5,15 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainWindow extends BaseFrame implements ActionListener {
-    Panel mainPanel= new Panel();
-    Panel teacherPanel = new Panel();
-    Panel studentPanel = new Panel();
-    Panel welcomePanel = new Panel();
-    Panel registerPanelTeacher = new Panel();
-    Panel registerPanelStudent = new Panel();
-    Button btnRegister = new Button("Register");
-    Button btnTeacher = new Button("Teacher");
-    Button btnStudent = new Button("Student");
+    private Panel mainPanel= new Panel();
+    private Panel teacherPanel = new Panel();
+    private Panel studentPanel = new Panel();
+    private Panel welcomePanel = new Panel();
+    private Panel registerPanelTeacher = new Panel();
+    private Panel registerPanelStudent = new Panel();
+    private Button btnRegister = new Button("Register");
+    private Button btnTeacher = new Button("Teacher");
+    private Button btnStudent = new Button("Student");
 
     public MainWindow(String title) throws HeadlessException {
         super(title);
@@ -111,6 +111,7 @@ public class MainWindow extends BaseFrame implements ActionListener {
                 this.mainPanel.add(registerPanelStudent);
             }
         }
+        this.mainPanel.validate();
         this.mainPanel.repaint();
     }
 }
