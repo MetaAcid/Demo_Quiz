@@ -18,24 +18,8 @@ public class MainWindow extends BaseFrame implements ActionListener {
     public MainWindow(String title) throws HeadlessException {
         super(title);
 
-        btnTeacher.addActionListener(this);
-        btnRegister.addActionListener(this);
-        btnStudent.addActionListener(this);
         Label lblWelcome = new Label("Welcome to a Math Quiz!");
         Panel buttonPanel = new Panel();
-        welcomePanel.add(lblWelcome);
-        this.setVisible(true);
-        this.setSize(500, 600);
-
-        buttonPanel.setLayout(new GridLayout(1,3));
-        buttonPanel.add(btnRegister);
-        buttonPanel.add(btnStudent);
-        buttonPanel.add(btnTeacher);
-
-        mainPanel.add(welcomePanel);
-        this.add(buttonPanel, BorderLayout.NORTH);
-        this.add(mainPanel, BorderLayout.CENTER);
-
         Panel pnlRegisterTeacher = new Panel();
         Panel pnlInputTeacher = new Panel();
         TextArea txtNameTeacher = new TextArea();
@@ -51,20 +35,37 @@ public class MainWindow extends BaseFrame implements ActionListener {
         TextArea txtSurnameStudent = new TextArea();
         TextArea txtPasswordStudent = new TextArea();
         TextArea txtClassID = new TextArea();
-
+        Panel pnlStuLogIn = new Panel();
+        TextArea txtStuAccountName = new TextArea();
+        TextArea txtStuPassword = new TextArea();
+        Button btnTeacherLogIn = new Button("Log In");
+        Panel pnlTeachLogIn = new Panel();
+        Button btnTeachLogIn = new Button("Log In");
+        TextArea txtTeachAccountName = new TextArea();
+        TextArea txtTeachPassword = new TextArea();
+        TextArea txtTeachClassID = new TextArea();
+        btnTeacher.addActionListener(this);
+        btnRegister.addActionListener(this);
+        btnStudent.addActionListener(this);
+        welcomePanel.add(lblWelcome);
+        this.setVisible(true);
+        this.setSize(500,600);
+        buttonPanel.setLayout(new GridLayout(1,3));
+        buttonPanel.add(btnRegister);
+        buttonPanel.add(btnStudent);
+        buttonPanel.add(btnTeacher);
+        mainPanel.add(welcomePanel);
+        this.add(buttonPanel, BorderLayout.NORTH);
+        this.add(mainPanel, BorderLayout.CENTER);
         registerPanelStudent.add(pnlRegisterStudent, BorderLayout.NORTH);
         registerPanelStudent.add(pnlInputStudent, BorderLayout.CENTER);
         registerPanelStudent.add(btnRegister, BorderLayout.SOUTH);
-
-        pnlRegister.add(btnStudent);
-        pnlRegister.add(btnTeacher);
+        pnlRegister.add(btnStudentRegister);
+        pnlRegister.add(btnTeacherRegister);
         pnlInputStudent.add(txtNameStudent);
         pnlInputStudent.add(txtSurnameStudent);
         pnlInputStudent.add(txtPasswordStudent);
         pnlInputStudent.add(txtClassID);
-
-        pnlRegisterTeacher.add(btnStudentRegister);
-        pnlRegisterTeacher.add(btnTeacherRegister);
         pnlInputTeacher.add(txtNameTeacher);
         pnlInputTeacher.add(txtSurnameTeacher);
         pnlInputTeacher.add(txtPasswordTeacher);
@@ -72,23 +73,10 @@ public class MainWindow extends BaseFrame implements ActionListener {
         registerPanelTeacher.add(pnlRegisterTeacher, BorderLayout.NORTH);
         registerPanelTeacher.add(btnRegister, BorderLayout.SOUTH);
         registerPanelTeacher.add(pnlInputTeacher, BorderLayout.CENTER);
-
-        Panel pnlStuLogIn = new Panel();
-        TextArea txtStuAccountName = new TextArea();
-        TextArea txtStuPassword = new TextArea();
-        Button btnTeacherLogIn = new Button();
-
         pnlStuLogIn.add(txtStuAccountName);
         pnlStuLogIn.add(txtStuPassword);
         studentPanel.add(pnlStuLogIn, BorderLayout.CENTER);
         studentPanel.add(btnTeacherLogIn, BorderLayout.SOUTH);
-
-        Panel pnlTeachLogIn = new Panel();
-        Button btnTeachLogIn = new Button();
-        TextArea txtTeachAccountName = new TextArea();
-        TextArea txtTeachPassword = new TextArea();
-        TextArea txtTeachClassID = new TextArea();
-
         pnlTeachLogIn.add(txtTeachAccountName);
         pnlTeachLogIn.add(txtTeachClassID);
         pnlTeachLogIn.add(txtTeachPassword);
@@ -110,13 +98,11 @@ public class MainWindow extends BaseFrame implements ActionListener {
             Button btnStudentRegister = new Button("Student");
             btnTeacherRegister.addActionListener(this);
             btnStudentRegister.addActionListener(this);
-
             Panel buttonPanelRegister = new Panel();
             buttonPanelRegister.add(btnStudentRegister);
             buttonPanelRegister.add(btnTeacherRegister);
             buttonPanelRegister.setLayout(new GridLayout(1,2));
             this.add(buttonPanelRegister, BorderLayout.NORTH);
-
             if (e.getSource() == btnTeacherRegister) {
                 this.mainPanel.removeAll();
                 this.mainPanel.add(registerPanelTeacher);
