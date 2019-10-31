@@ -1,9 +1,10 @@
 package ru.erixon.quizdemo.panels;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class StudentPanel extends BorderLayoutPanel {
+public class StudentPanel extends LogInPanel {
     public StudentPanel() {
-        this.setBackground(new Color(68, 63, 255));
+
     }
 }

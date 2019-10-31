@@ -26,7 +26,6 @@ public class MainFrame extends BaseFrame implements ActionListener {
         this.setLayout(new BorderLayout());
         initButtons();
         initPanels();
-
     }
 
     private void initButtons() {
