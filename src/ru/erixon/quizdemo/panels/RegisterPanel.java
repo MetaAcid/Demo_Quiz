@@ -10,10 +10,12 @@ public class RegisterPanel extends BorderLayoutPanel implements ActionListener, 
     private CheckboxGroup cbg = new CheckboxGroup();
     private Checkbox cbTeacher = new Checkbox("Teacher", cbg, false);
     private Checkbox cbStudent = new Checkbox("Student", cbg, true);
+    private StudentRegisterFormPanel pnlStudentRegister = new StudentRegisterFormPanel();
+    private TeacherRegisterFromPanel pnlTeacherRegister = new TeacherRegisterFromPanel();
 
     public RegisterPanel() {
-        this.setBackground(new Color(255, 165, 56));
         initCheckBoxes();
+        ChangeRegisterPanels();
     }
 
     private void initCheckBoxes(){
@@ -25,6 +27,18 @@ public class RegisterPanel extends BorderLayoutPanel implements ActionListener, 
         this.add(panel, BorderLayout.NORTH);
     }
 
+    private void ChangeRegisterPanels(){
+       if (cbg.getSelectedCheckbox().equals(cbTeacher)) {
+           this.remove(pnlStudentRegister);
+           this.add(pnlTeacherRegister, BorderLayout.CENTER);
+       }  else if (cbg.getSelectedCheckbox().equals(cbStudent)) {
+           this.remove(pnlTeacherRegister);
+           this.add(pnlStudentRegister, BorderLayout.CENTER);
+       }
+       this.validate();
+//       this.repaint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -33,10 +47,10 @@ public class RegisterPanel extends BorderLayoutPanel implements ActionListener, 
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getItemSelectable() == cbStudent){
-            this.setBackground(Color.BLACK);
+            this.ChangeRegisterPanels();
         }
         else if (e.getItemSelectable() == cbTeacher) {
-            this.setBackground(Color.DARK_GRAY);
+            this.ChangeRegisterPanels();
         }
 
         this.repaint();

@@ -21,7 +21,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
     public MainFrame(String title) throws HeadlessException {
         super(title);
         this.setVisible(true);
-        this.setSize(500, 600);
+        this.setSize(1000, 700);
 
         this.setLayout(new BorderLayout());
         initButtons();
