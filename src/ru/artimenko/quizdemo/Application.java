@@ -13,7 +13,7 @@ public class Application {
     }
 
     public static void StudentDialog(TeacherFrame Frametest){
-        BaseDialog studentDialog = new BaseDialog(Frametest) {};
+        BaseDialog studentDialog = new BaseDialog(Frametest, "test") {};
         Panel pnlLogIn = new Panel();
         TextArea txtAcountName = new TextArea();
         TextArea txtPassword = new TextArea();
@@ -29,7 +29,7 @@ public class Application {
         studentDialog.add(btnLogIn, BorderLayout.SOUTH);
     }
     public static void TeacherDialog(TeacherFrame Frametest){
-        BaseDialog teacherDialog = new BaseDialog(Frametest) {};
+        BaseDialog teacherDialog = new BaseDialog(Frametest,"test") {};
         Panel pnlLogIn = new Panel();
         Button btnLogIn = new Button();
         TextArea txtAcountName = new TextArea();

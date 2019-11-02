@@ -7,8 +7,8 @@ import java.awt.event.WindowEvent;
 public abstract class BaseDialog extends Dialog {
     private WindowAdapter windowAdapter;
 
-    public BaseDialog(Window owner) {
-        super(owner);
+    public BaseDialog(Window owner, String title) {
+        super(owner, title);
 
         this.windowAdapter =  new WindowAdapter() { //===MyWindowAdapter
             @Override

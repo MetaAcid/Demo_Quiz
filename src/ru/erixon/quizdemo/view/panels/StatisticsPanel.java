@@ -1,6 +1,4 @@
-package ru.erixon.quizdemo.panels;
-
-import javafx.scene.layout.Pane;
+package ru.erixon.quizdemo.view.panels;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package ru.erixon.quizdemo.panels;
+package ru.erixon.quizdemo.view.panels;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

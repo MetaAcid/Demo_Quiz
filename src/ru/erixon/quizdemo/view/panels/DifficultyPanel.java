@@ -1,12 +1,8 @@
-package ru.erixon.quizdemo.panels;
-
-import javafx.scene.layout.Pane;
+package ru.erixon.quizdemo.view.panels;
 
 import java.awt.*;
 
 public class DifficultyPanel extends BorderLayoutPanel {
-
-
     private Panel pnlMovement = new Panel();
     private Checkbox cbNormal = new Checkbox();
     private Checkbox cbEasy = new Checkbox();
@@ -21,18 +17,27 @@ public class DifficultyPanel extends BorderLayoutPanel {
     private Panel pnlMain = new Panel();
 
     public DifficultyPanel() {
+        pnlMain.add(pnlDifficulty, BorderLayout.CENTER);
+        pnlMain.add(lblDifficulty, BorderLayout.NORTH);
+        pnlMain.add(pnlMovement, BorderLayout.SOUTH);
+        this.add(pnlMain);
+        initDifficulty();
+        initButtons();
+
+    }
+
+    private void initButtons() {
+        pnlMovement.add(btnBack);
+        pnlMovement.add(btnNext);
+    }
+
+    private void initDifficulty() {
         pnlDifficulty.add(lblHard);
         pnlDifficulty.add(cbHard);
         pnlDifficulty.add(lblNormal);
         pnlDifficulty.add(cbNormal);
         pnlDifficulty.add(lblEasy);
         pnlDifficulty.add(cbEasy);
-        pnlMovement.add(btnBack);
-        pnlMovement.add(btnNext);
-        pnlMain.add(pnlDifficulty, BorderLayout.CENTER);
-        pnlMain.add(lblDifficulty, BorderLayout.NORTH);
-        pnlMain.add(pnlMovement, BorderLayout.SOUTH);
-        this.add(pnlMain);
     }
 
 }

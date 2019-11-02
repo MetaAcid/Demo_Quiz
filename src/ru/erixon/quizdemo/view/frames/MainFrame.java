@@ -1,7 +1,7 @@
-package ru.erixon.quizdemo.frames;
+package ru.erixon.quizdemo.view.frames;
 
 import ru.artimenko.quizdemo.BaseFrame;
-import ru.erixon.quizdemo.panels.*;
+import ru.erixon.quizdemo.view.panels.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
