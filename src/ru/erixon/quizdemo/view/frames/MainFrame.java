@@ -3,12 +3,13 @@ package ru.erixon.quizdemo.view.frames;
 import ru.artimenko.quizdemo.BaseFrame;
 import ru.erixon.quizdemo.view.panels.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame extends BaseFrame implements ActionListener {
-    private Panel buttonPanel = new Panel();
+    private Panel buttonPanel = new Panel(new GridLayout(1,3));
     private Panel mainPanel = new Panel();
     private Panel teacherPanel = new TeacherPanel();
     private Panel studentPanel = new StudentPanel();
@@ -22,7 +23,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
         super(title);
         this.setVisible(true);
         this.setSize(1000, 700);
-
+        this.setResizable(false);
         this.setLayout(new BorderLayout());
         initButtons();
         initPanels();
@@ -66,6 +67,11 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
     }
 
+    private void changeMainPanel(JPanel newPanel){
+        this.mainPanel.removeAll();
+        this.mainPanel.add(newPanel);
+    }
+
     private void changeMainPanel(Panel newPanel){
         this.mainPanel.removeAll();
         this.mainPanel.add(newPanel);
@@ -85,5 +91,9 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
         this.mainPanel.validate();
         this.mainPanel.repaint();
+    }
+
+    private static enum State {
+        REGISTER, STUDENT, TEACHER
     }
 }

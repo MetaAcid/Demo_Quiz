@@ -1,36 +1,26 @@
 package ru.erixon.quizdemo.view.panels;
 
-import ru.erixon.quizdemo.view.frames.TeacherFrame;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TeacherPanel extends LogInPanel implements ActionListener {
-    private TextField txtClassID = new TextField();
+public class TeacherPanel extends LogInPanel{
+    private JLabel lblClassId = new JLabel("Class ID");
+    private JTextField txtClassId = new JTextField();
 
     public TeacherPanel() {
-       this.pnlCenter.add(txtClassID);
-       this.btnLogIn.addActionListener(this);
-    }
-
-    private boolean checkLogin(){
-        return true;
-    }
-
-    private void printLoginError(){
-
+        lblClassId.setBounds(xOff, yOff + 60, 100, 20);
+        txtClassId.setBounds(xOff + 100, yOff + 60, 100, 20);
+        this.add(lblClassId);
+        this.add(txtClassId);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(btnLogIn)) {
-            if (checkLogin()) {
-                TeacherFrame frame = new TeacherFrame();
-            }
-            else {
-                printLoginError();
-            }
-        }
+    protected boolean checkLogin() {
+        return true;
+    }
+
+    @Override
+    protected void doLogin() {
+        throw new UnsupportedOperationException();
     }
 
 }

@@ -1,13 +1,15 @@
 package ru.erixon.quizdemo.view.panels;
 
-import java.awt.*;
+import javax.swing.*;
 
 public class StudentRegisterFormPanel extends RegisterFormPanel {
-    private Label lblClassID = new Label("Class ID:");
-    private TextField txtClassID = new TextField(15);
+    private JLabel lblClassID = new JLabel("Class ID:");
+    private JTextField txtClassID = new JTextField(15);
 
     public StudentRegisterFormPanel() {
-        this.pnlRegisterInfo.add(lblClassID);
-        this.pnlRegisterInfo.add(txtClassID);
+        lblClassID.setBounds(xOff, yOff + 120, 100, 20);
+        txtClassID.setBounds(xOff+100, yOff + 120, 100, 20);
+        this.add(lblClassID);
+        this.add(txtClassID);
     }
 }

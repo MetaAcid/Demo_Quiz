@@ -5,11 +5,13 @@ import ru.erixon.quizdemo.view.frames.QuizFrame;
 import ru.erixon.quizdemo.view.frames.TimerFrame;
 import ru.erixon.quizdemo.view.frames.StudentFrame;
 
+import java.sql.SQLException;
+
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         MainFrame mainFrame = new MainFrame("your title here");
         StudentFrame studentFrame = new StudentFrame(mainFrame,"Quiz");
-        //TimerFrame timerFrame = new TimerFrame("TestTimer");
+//TimerFrame timerFrame = new TimerFrame("TestTimer");
         QuizFrame quizFrame = new QuizFrame("Quiz");
     }
 }
