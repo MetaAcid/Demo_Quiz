@@ -1,5 +1,6 @@
 package ru.erixon.quizdemo.view.panels;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class TeacherPanel extends LogInPanel{

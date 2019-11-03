@@ -22,6 +22,7 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         movementPanel();
         quizPanel();
         this.add(pnlMain);
+        initButtons();
     }
 
     private void initButtons() {

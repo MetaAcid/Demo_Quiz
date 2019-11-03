@@ -1,7 +1,6 @@
 package ru.erixon.quizdemo.view.panels;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,7 @@ public abstract class LogInPanel extends Panel implements ActionListener {
 
     public LogInPanel() {
         this.setLayout(null);
-        lblAcctName.setBounds(xOff,yOff, 100,20);
+        lblAcctName.setBounds(xOff, yOff, 100,20);
         lblPassword.setBounds(xOff,yOff + 30,100,20);
         txtAcctName.setBounds(xOff + 100,yOff,100,20);
         txtPassword.setBounds(xOff + 100,yOff + 30,100,20);

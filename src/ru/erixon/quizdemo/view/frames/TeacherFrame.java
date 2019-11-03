@@ -38,9 +38,9 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnClassStat)) {
-            changeMainPanel(classStatPanel);
+//            changeMainPanel(classStatPanel);
         } else if (e.getSource().equals(btnStudentStat)) {
-            changeMainPanel(studentStatPanel);
+//            changeMainPanel(studentStatPanel);
         }
     }
 }
