@@ -1,5 +1,6 @@
 package ru.erixon.quizdemo.view.panels;
 
+import ru.erixon.quizdemo.view.frames.MainFrame;
 import ru.erixon.quizdemo.view.frames.StudentFrame;
 
 import java.awt.event.ActionEvent;

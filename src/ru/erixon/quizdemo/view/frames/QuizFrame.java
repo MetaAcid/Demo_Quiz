@@ -3,27 +3,28 @@ package ru.erixon.quizdemo.view.frames;
 import ru.artimenko.quizdemo.BaseFrame;
 
 import java.awt.*;
-@Deprecated
-public class TimerFrame extends BaseFrame {
-    private Label label = new Label();
+import ru.erixon.quizdemo.view.panels.QuizPanel;
 
-    public TimerFrame(String title) throws HeadlessException {
+public class QuizFrame extends BaseFrame{
+    private Label lblTimer = new Label();
+    private QuizPanel pnlQuiz = new QuizPanel();
+
+    public QuizFrame(String title) throws HeadlessException {
         super(title);
         Timer timer = new Timer(this);
         Thread timerThread = new Thread(timer);
         timerThread.start();
 
         this.setSize(700,700);
-        this.add(label);
+        this.add(lblTimer, BorderLayout.WEST);
+        this.add(pnlQuiz, BorderLayout.CENTER);
         this.setVisible(true);
-
     }
 
-
     private static class Timer implements Runnable {
-        private TimerFrame frame;
+        private QuizFrame frame;
 
-        public Timer(TimerFrame frame) {
+        public Timer(QuizFrame frame) {
             this.frame = frame;
         }
 
@@ -31,7 +32,7 @@ public class TimerFrame extends BaseFrame {
         public void run() {
             while (true) {
                 String currentTime = String.valueOf(System.currentTimeMillis());//unix epoch
-                frame.label.setText(currentTime);
+                frame.lblTimer.setText(currentTime);
                 frame.repaint();
                 try {
                     Thread.sleep(1000);
