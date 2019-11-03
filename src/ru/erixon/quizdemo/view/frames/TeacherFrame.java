@@ -30,17 +30,17 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
         this.add(pnlMain, BorderLayout.CENTER);
     }
 
-    private void changeMainPanel(Frame newFrame){
+    private void changeMainPanel(Panel newPanel){
         this.pnlMain.removeAll();
-        this.pnlMain.add(newFrame);
+        this.pnlMain.add(newPanel);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnClassStat)) {
-//            changeMainPanel(classStatPanel);
+             changeMainPanel(classStatPanel);
         } else if (e.getSource().equals(btnStudentStat)) {
-//            changeMainPanel(studentStatPanel);
+            changeMainPanel(studentStatPanel);
         }
     }
 }

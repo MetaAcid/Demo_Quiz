@@ -2,17 +2,20 @@ package ru.erixon.quizdemo.view.panels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-public abstract class RegisterFormPanel extends Panel {
-    private JLabel lblName = new JLabel("Name:");
-    private JLabel lblSurname = new JLabel("Surname:");
-    private JLabel lblPassword = new JLabel("Password:");
-    private JLabel lblAcctName = new JLabel("Account Name:");
-    private JTextField txtName = new JTextField(15);
-    private JTextField txtSurname = new JTextField(15);
-    private JPasswordField txtPassword = new JPasswordField(15);
-    private JTextField txtAcctName = new JTextField(15);
-    private Button btnRegister = new Button("Register");
+public abstract class RegisterFormPanel extends Panel implements ActionListener {
+    protected JLabel lblName = new JLabel("Name:");
+    protected JLabel lblSurname = new JLabel("Surname:");
+    protected JLabel lblPassword = new JLabel("Password:");
+    protected JLabel lblAcctName = new JLabel("Account Name:");
+    protected JTextField txtName = new JTextField(15);
+    protected JTextField txtSurname = new JTextField(15);
+    protected JPasswordField txtPassword = new JPasswordField(15);
+    protected JTextField txtAcctName = new JTextField(15);
+    protected Button btnRegister = new Button("Register");
     protected int xOff = 350;
     protected int yOff = 50;
 
@@ -35,7 +38,27 @@ public abstract class RegisterFormPanel extends Panel {
         this.add(txtAcctName);
         this.add(lblPassword);
         this.add(txtPassword);
-
         this.add(btnRegister);
+        initActions();
+    }
+
+    protected abstract void doRegister() throws SQLException;
+
+    private void initActions() {
+        btnRegister.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        try {
+            Object source = e.getSource();
+
+            if (source.equals(btnRegister)) {
+                doRegister();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
