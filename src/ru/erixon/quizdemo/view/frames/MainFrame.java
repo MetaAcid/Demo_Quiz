@@ -67,11 +67,6 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
     }
 
-    private void changeMainPanel(JPanel newPanel){
-        this.mainPanel.removeAll();
-        this.mainPanel.add(newPanel);
-    }
-
     private void changeMainPanel(Panel newPanel){
         this.mainPanel.removeAll();
         this.mainPanel.add(newPanel);
@@ -93,7 +88,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
         this.mainPanel.repaint();
     }
 
-    private static enum State {
+    private enum State {
         REGISTER, STUDENT, TEACHER
     }
 }
