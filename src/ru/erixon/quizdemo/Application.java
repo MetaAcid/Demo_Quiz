@@ -2,6 +2,9 @@ package ru.erixon.quizdemo;
 
 import ru.erixon.quizdemo.control.database.PostgresConnectionManager;
 import ru.erixon.quizdemo.view.frames.MainFrame;
+import ru.erixon.quizdemo.view.frames.StudentFrame;
+import ru.erixon.quizdemo.view.frames.QuizFrame;
+import ru.erixon.quizdemo.view.frames.TeacherFrame;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,8 +25,8 @@ public class Application {
 
 
         MainFrame mainFrame = new MainFrame("your title here");
-//        StudentFrame studentFrame = new StudentFrame(mainFrame,"Quiz");
-//TimerFrame timerFrame = new TimerFrame("TestTimer");
-//        QuizFrame quizFrame = new QuizFrame("Quiz");
+        StudentFrame studentFrame = new StudentFrame(mainFrame,"Quiz");
+        QuizFrame quizFrame = new QuizFrame("Quiz");
+        TeacherFrame teacherFrame = new TeacherFrame("Teacher");
     }
 }
