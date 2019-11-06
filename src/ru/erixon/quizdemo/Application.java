@@ -25,8 +25,7 @@ public class Application {
 
 
         MainFrame mainFrame = new MainFrame("your title here");
-        StudentFrame studentFrame = new StudentFrame(mainFrame,"Quiz");
-        QuizFrame quizFrame = new QuizFrame("Quiz");
-        TeacherFrame teacherFrame = new TeacherFrame("Teacher");
+        //QuizFrame quizFrame = new QuizFrame("Quiz");
+        //TeacherFrame teacherFrame = new TeacherFrame("Teacher");
     }
 }
