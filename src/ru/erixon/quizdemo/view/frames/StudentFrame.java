@@ -22,7 +22,8 @@ public class StudentFrame extends BaseFrame implements ActionListener {
         super(title);
         this.setVisible(true);
         this.setSize(1000, 700);
-        this.setLocation(400, 400);
+        this.setResizable(false);
+        this.setLayout(new BorderLayout());
         initButtons();
         initPanels();
         checkBackButton();

@@ -15,6 +15,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
     private Panel studentPanel = new StudentPanel();
     private Panel registerPanel = new RegisterPanel();
     private Panel welcomePanel = new Panel();
+    private Label lblWelcome = new Label("Welcome to A Math Quiz!");
     private Button btnRegister = new Button("Register");
     private Button btnTeacher = new Button("Teacher");
     private Button btnStudent = new Button("Student");
@@ -52,7 +53,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
     }
 
     private void initWelcomePanel() {
-
+        this.welcomePanel.add(lblWelcome);
     }
 
     private void initRegisterPanel() {
