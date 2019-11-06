@@ -1,4 +1,4 @@
-package ru.erixon.quizdemo.control.database;
+package ru.erixon.quizdemo.controller.database;
 
 
 import java.sql.Connection;

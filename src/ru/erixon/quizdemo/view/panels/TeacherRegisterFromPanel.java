@@ -1,10 +1,9 @@
 package ru.erixon.quizdemo.view.panels;
 
-import com.sun.xml.internal.ws.addressing.WsaActionUtil;
 import ru.erixon.quizdemo.Application;
-import ru.erixon.quizdemo.control.database.dao.TeacherDao;
+import ru.erixon.quizdemo.controller.database.dao.TeacherDao;
+import ru.erixon.quizdemo.controller.utils.HashingTools;
 
-import javax.swing.*;
 import java.sql.SQLException;
 
 public class TeacherRegisterFromPanel extends RegisterFormPanel {
@@ -17,7 +16,8 @@ public class TeacherRegisterFromPanel extends RegisterFormPanel {
     }
     @Override
     protected void doRegister() throws SQLException {
-        teacherDao.registerNew(this.txtAcctName.getText(), this.txtPassword.getText(), this.txtName.getText(), this.txtSurname.getText(), this.txtClassID);
+        String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
+        teacherDao.registerNew(this.txtAcctName.getText(), passwordHash, this.txtName.getText(), this.txtSurname.getText());
         System.out.println("New Teacher!");
     }
 }
