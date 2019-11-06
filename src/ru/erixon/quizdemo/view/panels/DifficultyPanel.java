@@ -1,9 +1,13 @@
 package ru.erixon.quizdemo.view.panels;
 
+import ru.erixon.quizdemo.view.frames.QuizFrame;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class DifficultyPanel extends BorderLayoutPanel {
+public class DifficultyPanel extends BorderLayoutPanel implements ActionListener {
     private Panel pnlMovement = new Panel();
     private Checkbox cbNormal = new Checkbox();
     private Checkbox cbEasy = new Checkbox();
@@ -13,7 +17,6 @@ public class DifficultyPanel extends BorderLayoutPanel {
     private JLabel lblHard = new JLabel("Hard");
     private JLabel lblDifficulty = new JLabel("Please, choose the difficulty of a Quiz:");
     private Button btnNext = new Button("Next");
-    private Button btnBack = new Button("Back");
     private Panel pnlDifficulty = new Panel();
     private Panel pnlMain = new Panel();
 
@@ -28,7 +31,7 @@ public class DifficultyPanel extends BorderLayoutPanel {
     }
 
     private void initButtons() {
-        pnlMovement.add(btnBack);
+        btnNext.addActionListener(this);
         pnlMovement.add(btnNext);
     }
 
@@ -41,4 +44,10 @@ public class DifficultyPanel extends BorderLayoutPanel {
         pnlDifficulty.add(cbEasy);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(btnNext)) {
+            QuizFrame frame = new QuizFrame("Quiz");
+        }
+    }
 }

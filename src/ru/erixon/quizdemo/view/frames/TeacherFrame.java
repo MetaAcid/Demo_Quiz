@@ -3,6 +3,8 @@ package ru.erixon.quizdemo.view.frames;
 import ru.artimenko.quizdemo.BaseFrame;
 import ru.erixon.quizdemo.view.panels.StudentChooseStatPanel;
 import ru.erixon.quizdemo.view.panels.ClassStatPanel;
+import ru.erixon.quizdemo.view.panels.StudentSingleStatPanel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,7 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
 
     private ClassStatPanel classStatPanel = new ClassStatPanel();
     private StudentChooseStatPanel studentChooseStatPanel = new StudentChooseStatPanel();
+    private StudentSingleStatPanel studentSingleStatPanel = new StudentSingleStatPanel();
     private Button btnClassStat = new Button("Class Statistics");
     private Button btnStudentStat = new Button("Student Statistics");
     private Panel pnlButtons = new Panel();
@@ -23,7 +26,8 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
         super(title);
         this.setVisible(true);
         this.setSize(1000, 700);
-        this.setLocation(400, 400);
+        this.setResizable(false);
+        this.setLayout(new BorderLayout());
         initButtons();
         initPanels();
         checkBackButton();
@@ -78,8 +82,11 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
             changeMainPanel(studentChooseStatPanel);
             state = State.CHOOSE_STUDENT_STAT;
         } else if (e.getSource().equals(btnBack)) {
-            changeMainPanel(pnlMain);
+            changeMainPanel(pnlButtons);
             state = State.INIT;
+        } else if (e.getSource().equals(btnNext)) {
+            changeMainPanel(studentSingleStatPanel);
+            state = State.STUDENT_STAT;
         }
         checkBackButton();
         checkNextButton();

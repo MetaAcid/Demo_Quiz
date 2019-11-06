@@ -77,4 +77,5 @@ public class StudentFrame extends BaseFrame implements ActionListener {
     private enum State {
         INIT, CHOOSE_DIFFICULTY, STATISTICS
     }
+
 }

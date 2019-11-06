@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 public class StudentChooseStatPanel extends BorderLayoutPanel{
 
-    private StudentSingleStatPanel studentSingleStatPanel = new StudentSingleStatPanel();
     private Label lblStuName = new Label("Student Name:");
     private Label lblClassID = new Label("Student Class:");
     private TextField txtStuName = new TextField(15);

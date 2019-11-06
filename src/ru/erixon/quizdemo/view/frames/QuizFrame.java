@@ -15,10 +15,12 @@ public class QuizFrame extends BaseFrame{
         Thread timerThread = new Thread(timer);
         timerThread.start();
 
-        this.setSize(700,700);
+        this.setVisible(true);
+        this.setSize(800, 600);
+        this.setResizable(false);
+        this.setLayout(new BorderLayout());
         this.add(lblTimer, BorderLayout.WEST);
         this.add(pnlQuiz, BorderLayout.CENTER);
-        this.setVisible(true);
     }
 
     private static class Timer implements Runnable {

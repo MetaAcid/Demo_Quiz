@@ -1,5 +1,7 @@
 package ru.erixon.quizdemo.view.panels;
 
+import ru.erixon.quizdemo.view.frames.TeacherFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,7 +23,7 @@ public class TeacherPanel extends LogInPanel{
 
     @Override
     protected void doLogin() {
-        throw new UnsupportedOperationException();
+        TeacherFrame frame = new TeacherFrame("Teacher");
     }
 
 }
