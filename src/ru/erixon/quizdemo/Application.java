@@ -17,10 +17,6 @@ public class Application {
     }
 
     public static void main(String[] args) throws SQLException {
-
-
         MainFrame mainFrame = new MainFrame("Main Menu");
-        //QuizFrame quizFrame = new QuizFrame("Quiz");
-        //TeacherFrame teacherFrame = new TeacherFrame("Teacher");
     }
 }
