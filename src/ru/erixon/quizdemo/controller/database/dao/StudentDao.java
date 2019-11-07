@@ -1,9 +1,11 @@
-package ru.erixon.quizdemo.control.database.dao;
+package ru.erixon.quizdemo.controller.database.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static ru.erixon.quizdemo.utils.Assert.assertNotEmpty;
 
 public class StudentDao {
     private Connection connection;
@@ -47,11 +49,5 @@ public class StudentDao {
         }
 
         throw new RuntimeException("something has gone wrong");
-    }
-
-    private void assertNotEmpty(String s, String name) {
-        if (s == null || s.length() == 0){
-            throw new RuntimeException(name + " cannot be null or empty");
-        }
     }
 }

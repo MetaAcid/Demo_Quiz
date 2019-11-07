@@ -1,31 +1,29 @@
-package ru.erixon.quizdemo.control.database.dao;
+package ru.erixon.quizdemo.controller.database.dao;
+
+import ru.erixon.quizdemo.utils.Assert;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static ru.erixon.quizdemo.utils.Assert.assertNotEmpty;
+
 public class TeacherDao {
     private Connection connection;
 
     public TeacherDao(Connection connection) {this.connection = connection;}
 
-    public void registerNew(String acctName, String passwordHash, String name, String surname, String classId) throws SQLException {
+    public void registerNew(String acctName, String passwordHash, String name, String surname) throws SQLException {
         assertNotEmpty(acctName, "account name");
         assertNotEmpty(passwordHash, "password");
         assertNotEmpty(name, "name");
         assertNotEmpty(surname, "surname");
-        assertNotEmpty(classId, "classId");
 
         String sql = String.format(
                 "insert into teachers (account_name, name, surname, password_hash)" +
-                        "values (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\');"
-                ,acctName, name, surname, passwordHash, classId);
-
-        String sqlClass_ID = String.format(
-                "insert into class_id ()" +
-                        "values (\'%s\');"
-                ,classId);
+                        "values (\'%s\', \'%s\', \'%s\', \'%s\');"
+                ,acctName, name, surname, passwordHash);
 
         if (!existsAcctName(acctName)){
             PreparedStatement ps = this.connection.prepareStatement(sql);
@@ -35,10 +33,10 @@ public class TeacherDao {
             throw new RuntimeException("This account already exists");
         }
 
-        if (!existsClassID(classId)){
-            PreparedStatement ps = this.connection.prepareStatement(sqlClass_ID);
-            ps.execute();
-        }
+//        if (!existsClassID(classId)){
+//            PreparedStatement ps = this.connection.prepareStatement(sqlClass_ID);
+//            ps.execute();
+//        }
 
     }
 
@@ -71,12 +69,5 @@ public class TeacherDao {
 
         throw new RuntimeException("something has gone wrong");
 
-    }
-
-
-    private void assertNotEmpty(String s, String name) {
-        if (s == null || s.length() == 0){
-            throw new RuntimeException(name + " cannot be null or empty");
-        }
     }
 }

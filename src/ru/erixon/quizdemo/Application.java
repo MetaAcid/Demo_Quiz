@@ -1,6 +1,6 @@
 package ru.erixon.quizdemo;
 
-import ru.erixon.quizdemo.control.database.PostgresConnectionManager;
+import ru.erixon.quizdemo.controller.database.PostgresConnectionManager;
 import ru.erixon.quizdemo.view.frames.MainFrame;
 import ru.erixon.quizdemo.view.frames.QuizFrame;
 
