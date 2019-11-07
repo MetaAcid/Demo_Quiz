@@ -2,6 +2,7 @@ package ru.erixon.quizdemo;
 
 import ru.erixon.quizdemo.control.database.PostgresConnectionManager;
 import ru.erixon.quizdemo.view.frames.MainFrame;
+import ru.erixon.quizdemo.view.frames.QuizFrame;
 
 import java.sql.SQLException;
 
@@ -16,7 +17,7 @@ public class Application {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         MainFrame mainFrame = new MainFrame("Main Menu");
     }
 }

@@ -28,15 +28,15 @@ public class Application {
         studentDialog.add(pnlLogIn, BorderLayout.CENTER);
         studentDialog.add(btnLogIn, BorderLayout.SOUTH);
     }
-    public static void TeacherDialog(TeacherFrame Frametest){
-        BaseDialog teacherDialog = new BaseDialog(Frametest,"test") {};
+    public static void TeacherDialog(TeacherFrame FrameTest){
+        BaseDialog teacherDialog = new BaseDialog(FrameTest,"test") {};
         Panel pnlLogIn = new Panel();
         Button btnLogIn = new Button();
-        TextArea txtAcountName = new TextArea();
+        TextArea txtAccountName = new TextArea();
         TextArea txtPassword = new TextArea();
         TextArea txtClassID = new TextArea();
 
-        pnlLogIn.add(txtAcountName);
+        pnlLogIn.add(txtAccountName);
         pnlLogIn.add(txtClassID);
         pnlLogIn.add(txtPassword);
 

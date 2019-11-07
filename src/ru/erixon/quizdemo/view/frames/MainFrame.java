@@ -53,6 +53,7 @@ public class MainFrame extends BaseFrame implements ActionListener {
     }
 
     private void initWelcomePanel() {
+        lblWelcome.setSize(200, 50);
         this.welcomePanel.add(lblWelcome);
     }
 
