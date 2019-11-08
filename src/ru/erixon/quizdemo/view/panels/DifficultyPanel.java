@@ -7,41 +7,37 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DifficultyPanel extends BorderLayoutPanel implements ActionListener {
-    private JCheckBox cbNormal = new JCheckBox();
-    private JCheckBox cbEasy = new JCheckBox();
-    private JCheckBox cbHard = new JCheckBox();
-    private JLabel lblNormal = new JLabel("Normal");
-    private JLabel lblEasy = new JLabel("Easy");
-    private JLabel lblHard = new JLabel("Hard");
-    private JLabel lblDifficulty = new JLabel("Please, choose the difficulty of a Quiz:");
-    private Button btnNext = new Button("Next");
+public class DifficultyPanel extends Panel implements ActionListener {
+    private CheckboxGroup checkboxGroup = new CheckboxGroup();
+    protected Checkbox cbNormal = new Checkbox("Normal", checkboxGroup, false);
+    protected Checkbox cbEasy = new Checkbox("Easy", checkboxGroup, false);
+    protected Checkbox cbHard = new Checkbox("Hard", checkboxGroup, false);
+    protected JLabel lblDifficulty = new JLabel("Please, choose the difficulty of a Quiz:");
+    protected Button btnNext = new Button("Next");
     protected int xOff = 350;
     protected int yOff = 50;
 
     public DifficultyPanel() {
         this.setLayout(null);
-        lblDifficulty.setBounds(xOff, yOff, 100, 20);
-        lblHard.setBounds(xOff, yOff + 30, 100, 20);
+        lblDifficulty.setBounds(xOff, yOff, 400, 20);
         cbHard.setBounds(xOff + 100, yOff + 30, 100, 20);
-        lblNormal.setBounds(xOff, yOff +60, 100, 20);
         cbNormal.setBounds(xOff + 100, yOff + 60, 100, 20);
-        lblEasy.setBounds(xOff, yOff + 90, 100, 20);
         cbEasy.setBounds(xOff + 100, yOff + 90, 100, 20);
-        this.add(lblDifficulty);
-        this.add(lblHard);
-        this.add(cbHard);
-        this.add(lblNormal);
-        this.add(cbNormal);
-        this.add(lblEasy);
-        this.add(cbEasy);
-        initButtons();
         btnNext.setBounds(xOff + 50, yOff + 150, 200, 40);
+        this.add(lblDifficulty);
+        this.add(cbHard);
+        this.add(cbNormal);
+        this.add(cbEasy);
         this.add(btnNext);
+        initButtons();
     }
 
-    private void initButtons() {
+    protected void initButtons() {
         btnNext.addActionListener(this);
+    }
+
+    private void initCheckBox() {
+
     }
 
     @Override
@@ -49,5 +45,7 @@ public class DifficultyPanel extends BorderLayoutPanel implements ActionListener
         if (e.getSource().equals(btnNext)) {
             QuizFrame frame = new QuizFrame("Quiz");
         }
+        this.validate();
+        this.repaint();
     }
 }

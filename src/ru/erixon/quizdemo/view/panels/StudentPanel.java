@@ -1,6 +1,5 @@
 package ru.erixon.quizdemo.view.panels;
 
-import ru.erixon.quizdemo.view.frames.MainFrame;
 import ru.erixon.quizdemo.view.frames.StudentFrame;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +18,6 @@ public class StudentPanel extends LogInPanel implements ActionListener {
 
     @Override
     protected void doLogin() {
-        StudentFrame frame = new StudentFrame(null, "Quiz");
+        StudentFrame frame = new StudentFrame(null, "Student Window");
     }
 }

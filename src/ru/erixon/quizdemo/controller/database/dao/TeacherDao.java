@@ -32,12 +32,22 @@ public class TeacherDao {
         else {
             throw new RuntimeException("This account already exists");
         }
+    }
 
-//        if (!existsClassID(classId)){
-//            PreparedStatement ps = this.connection.prepareStatement(sqlClass_ID);
-//            ps.execute();
-//        }
+    public boolean checkLogIn(String acctName, String passwordHash) throws SQLException {
+        String sql = "select * from teachers " +
+                "where account_name = \'" + acctName + "\' " +
+                "and password_hash = \'" + passwordHash + "\'";
 
+        PreparedStatement ps = connection.prepareStatement(sql);
+
+        if (ps.execute()) {
+            ResultSet rs = ps.getResultSet();
+
+            return rs.getFetchSize() > 0;
+        }
+
+        throw new RuntimeException("something has gone wrong");
     }
 
     public boolean existsAcctName(String acctName) throws SQLException {
@@ -53,21 +63,5 @@ public class TeacherDao {
         }
 
         throw new RuntimeException("something has gone wrong");
-    }
-
-    public boolean existsClassID(String classId) throws SQLException {
-        String sqlClass_ID = "select * from Class_id " +
-                "where class_id = \'" + classId + "\'";
-
-        PreparedStatement ps = connection.prepareStatement(sqlClass_ID);
-
-        if (ps.execute()) {
-            ResultSet rs = ps.getResultSet();
-
-            return rs.getFetchSize() > 0;
-        }
-
-        throw new RuntimeException("something has gone wrong");
-
     }
 }

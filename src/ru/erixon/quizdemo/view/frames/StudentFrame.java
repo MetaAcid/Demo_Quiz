@@ -12,7 +12,7 @@ public class StudentFrame extends BaseFrame implements ActionListener {
    private Button btnPlayQuiz = new Button("Play a Quiz!");
    private Button btnStudentStat = new Button("Your Statistics");
    private Button btnBack = new Button("Back");
-   private Panel pnlMain = new Panel();
+   private Panel pnlMain = new Panel(new BorderLayout());
    private Panel pnlButton = new Panel();
    private DifficultyPanel pnlDifficulty = new DifficultyPanel();
    private StatisticsPanel pnlStatistics = new StatisticsPanel();
@@ -44,7 +44,7 @@ public class StudentFrame extends BaseFrame implements ActionListener {
 
     private void changeMainPanel(Panel newPanel){
         this.pnlMain.removeAll();
-        this.pnlMain.add(newPanel);
+        this.pnlMain.add(newPanel, BorderLayout.CENTER);
     }
 
     private void checkBackButton(){
