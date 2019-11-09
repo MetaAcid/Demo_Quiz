@@ -3,7 +3,6 @@ package ru.erixon.quizdemo.view.frames;
 import ru.artimenko.quizdemo.BaseFrame;
 import ru.erixon.quizdemo.view.panels.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

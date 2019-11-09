@@ -46,7 +46,7 @@ public abstract class LogInPanel extends Panel implements ActionListener {
             doLogin();
         }
         else {
-            throw new RuntimeException("Неверный логин или пароль!");
+            throw new RuntimeException("Incorrect Log In or Password!");
         }
     }
 

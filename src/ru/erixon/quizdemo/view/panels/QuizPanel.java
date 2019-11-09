@@ -49,7 +49,7 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         if (e.getSource().equals(btnBackToMainMenu)) {
             MainFrame frame = new MainFrame("Main Menu");
         } else if (e.getSource().equals(btnSubmit)) {
-            QuizFrame frame = new QuizFrame("Quiz");
+            QuizFrame frame = new QuizFrame("Quiz Window");
         }
     }
 }

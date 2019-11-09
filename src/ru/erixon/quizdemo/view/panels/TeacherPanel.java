@@ -6,7 +6,6 @@ import ru.erixon.quizdemo.controller.utils.HashingTools;
 import ru.erixon.quizdemo.view.frames.TeacherFrame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.sql.SQLException;
 
 public class TeacherPanel extends LogInPanel{

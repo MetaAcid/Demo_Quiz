@@ -3,13 +3,8 @@ package ru.erixon.quizdemo.view.panels;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class RegisterPanel extends BorderLayoutPanel implements ActionListener {
-    private CheckboxGroup cbg = new CheckboxGroup();
-    private Checkbox cbTeacher = new Checkbox("Teacher", cbg, false);
-    private Checkbox cbStudent = new Checkbox("Student", cbg, true);
     private Button btnTeacher = new Button("Teacher");
     private Button btnStudent = new Button("Student");
     private StudentRegisterFormPanel pnlStudentRegister = new StudentRegisterFormPanel();
@@ -39,7 +34,6 @@ public class RegisterPanel extends BorderLayoutPanel implements ActionListener {
            this.add(pnlStudentRegister, BorderLayout.CENTER);
        }
        this.validate();
-//       this.repaint();
     }
 
     @Override
@@ -73,7 +67,7 @@ public class RegisterPanel extends BorderLayoutPanel implements ActionListener {
         }
     }
 
-    private static enum State {
+    private enum State {
         STUDENT, TEACHER
     }
 }

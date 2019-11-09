@@ -23,6 +23,5 @@ public class StudentRegisterFormPanel extends RegisterFormPanel {
     protected void doRegister() throws SQLException {
         String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
         studentDao.registerNew(this.txtAcctName.getText(), passwordHash, this.txtName.getText(),this.txtSurname.getText(), this.txtClassID.getText());
-        System.out.println("new student!");
     }
 }

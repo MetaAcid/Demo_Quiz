@@ -2,14 +2,11 @@ package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.view.frames.StudentFrame;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StudentPanel extends LogInPanel implements ActionListener {
 
-    public StudentPanel() {
-
-    }
+    public StudentPanel() {}
 
     @Override
     protected boolean checkLogin() {

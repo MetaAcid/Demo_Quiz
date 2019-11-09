@@ -1,7 +1,5 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
-import ru.erixon.quizdemo.utils.Assert;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
