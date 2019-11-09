@@ -17,8 +17,13 @@ public class PostgresConnectionManager {
         }
     }
 
-    public PostgresConnectionManager(String url, String user, String password) throws SQLException {
-        this.connection = DriverManager.getConnection(url, user, password);
+    public PostgresConnectionManager(String url, String user, String password) {
+        try {
+            this.connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(3);
+        }
     }
 
     public Connection getConnection() {

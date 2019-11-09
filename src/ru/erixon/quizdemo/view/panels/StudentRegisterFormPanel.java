@@ -2,6 +2,7 @@ package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.Application;
 import ru.erixon.quizdemo.controller.database.dao.StudentDao;
+import ru.erixon.quizdemo.controller.database.dao.StudentDao_old;
 import ru.erixon.quizdemo.controller.utils.HashingTools;
 
 import javax.swing.*;
@@ -22,6 +23,6 @@ public class StudentRegisterFormPanel extends RegisterFormPanel {
     @Override
     protected void doRegister() throws SQLException {
         String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
-        studentDao.registerNew(this.txtAcctName.getText(), passwordHash, this.txtName.getText(),this.txtSurname.getText(), this.txtClassID.getText());
+//        studentDao.registerNew(this.txtAcctName.getText(), passwordHash, this.txtName.getText(),this.txtSurname.getText(), this.txtClassID.getText());
     }
 }

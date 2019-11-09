@@ -1,65 +1,30 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
+import ru.erixon.quizdemo.model.user.Teacher;
+
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static ru.erixon.quizdemo.utils.Assert.assertNotEmpty;
+public class TeacherDao extends UserDao<Teacher> {
 
-public class TeacherDao {
-    private Connection connection;
-
-    public TeacherDao(Connection connection) {this.connection = connection;}
-
-    public void registerNew(String acctName, String passwordHash, String name, String surname) throws SQLException {
-        assertNotEmpty(acctName, "account name");
-        assertNotEmpty(passwordHash, "password");
-        assertNotEmpty(name, "name");
-        assertNotEmpty(surname, "surname");
-
-        String sql = String.format(
-                "insert into teachers (account_name, name, surname, password_hash)" +
-                        "values (\'%s\', \'%s\', \'%s\', \'%s\');"
-                ,acctName, name, surname, passwordHash);
-
-        if (!existsAcctName(acctName)){
-            PreparedStatement ps = this.connection.prepareStatement(sql);
-            ps.execute();
-        }
-        else {
-            throw new RuntimeException("This account already exists");
-        }
+    public TeacherDao(Connection connection) {
+        super(connection);
     }
 
-    public boolean checkLogIn(String acctName, String passwordHash) throws SQLException {
-        String sql = "select * from teachers " +
-                "where account_name = \'" + acctName + "\' " +
-                "and password_hash = \'" + passwordHash + "\'";
-
-        PreparedStatement ps = connection.prepareStatement(sql);
-
-        if (ps.execute()) {
-            ResultSet rs = ps.getResultSet();
-
-            return rs.getFetchSize() > 0;
-        }
-
-        throw new RuntimeException("something has gone wrong");
+    @Override
+    protected String getTableName() {
+        return "teachers";
     }
 
-    public boolean existsAcctName(String acctName) throws SQLException {
-        String sql = "select * from teachers " +
-                "where account_name = \'" + acctName + "\'";
+    @Override
+    public void createTable() {
 
-        PreparedStatement ps = connection.prepareStatement(sql);
+    }
 
-        if (ps.execute()) {
-            ResultSet rs = ps.getResultSet();
-
-            return rs.getFetchSize() > 0;
-        }
-
-        throw new RuntimeException("something has gone wrong");
+    @Override
+    public Teacher getById(long id) throws SQLException {
+        ResultSet rs = getRsById(id);
+        return new Teacher(rs.getLong("id"),rs.getString("account_name"), rs.getString("name"), rs.getString("surname"), rs.getString("password_hash"));
     }
 }

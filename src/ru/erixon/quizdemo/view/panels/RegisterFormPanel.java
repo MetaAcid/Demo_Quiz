@@ -57,7 +57,6 @@ public abstract class RegisterFormPanel extends Panel implements ActionListener 
             Object source = e.getSource();
 
             if (source.equals(btnRegister)) {
-                MainFrame frame = new MainFrame("Main Menu");
                 doRegister();
             }
         } catch (SQLException ex) {
