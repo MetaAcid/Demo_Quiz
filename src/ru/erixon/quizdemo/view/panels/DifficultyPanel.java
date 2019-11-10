@@ -19,11 +19,11 @@ public class DifficultyPanel extends Panel implements ActionListener {
 
     public DifficultyPanel() {
         this.setLayout(null);
-        lblDifficulty.setBounds(xOff, yOff, 400, 20);
+        lblDifficulty.setBounds(xOff + 40, yOff, 400, 20);
         cbHard.setBounds(xOff + 100, yOff + 30, 100, 20);
         cbNormal.setBounds(xOff + 100, yOff + 60, 100, 20);
         cbEasy.setBounds(xOff + 100, yOff + 90, 100, 20);
-        btnNext.setBounds(xOff + 50, yOff + 150, 200, 40);
+        btnNext.setBounds(xOff + 40, yOff + 150, 200, 40);
         this.add(lblDifficulty);
         this.add(cbHard);
         this.add(cbNormal);

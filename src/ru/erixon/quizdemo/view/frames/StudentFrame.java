@@ -13,16 +13,21 @@ public class StudentFrame extends BaseFrame implements ActionListener {
    private Button btnStudentStat = new Button("Your Statistics");
    private Button btnBack = new Button("Back");
    private Panel pnlMain = new Panel(new BorderLayout());
-   private Panel pnlButton = new Panel();
    private DifficultyPanel pnlDifficulty = new DifficultyPanel();
    private StatisticsPanel pnlStatistics = new StatisticsPanel();
    private State state = State.INIT;
+   protected int xOff = 350;
+   protected int yOff = 50;
 
     public StudentFrame(Window owner, String title) throws HeadlessException {
         super(title);
+        this.setLayout(null);
         this.setVisible(true);
         this.setSize(1000, 700);
-        //this.setResizable(false);
+        this.setResizable(false);
+        btnBack.setBounds(xOff, yOff - 600, 800, 40);
+        btnPlayQuiz.setBounds(xOff, yOff, 400, 40);
+        btnStudentStat.setBounds(xOff, yOff + 30, 400, 40);
         initButtons();
         initPanels();
         checkBackButton();
@@ -32,19 +37,18 @@ public class StudentFrame extends BaseFrame implements ActionListener {
         btnPlayQuiz.addActionListener(this);
         btnStudentStat.addActionListener(this);
         btnBack.addActionListener(this);
-        this.pnlButton.add(btnPlayQuiz);
-        this.pnlButton.add(btnStudentStat);
-        this.add(btnBack, BorderLayout.SOUTH);
     }
 
     private void initPanels() {
-        this.pnlMain.add(pnlButton, BorderLayout.CENTER);
+        this.pnlMain.add(btnBack);
+        this.pnlMain.add(btnPlayQuiz);
+        this.pnlMain.add(btnStudentStat);
         this.add(pnlMain);
     }
 
     private void changeMainPanel(Panel newPanel){
         this.pnlMain.removeAll();
-        this.pnlMain.add(newPanel, BorderLayout.CENTER);
+        this.pnlMain.add(newPanel);
     }
 
     private void checkBackButton(){
@@ -65,7 +69,7 @@ public class StudentFrame extends BaseFrame implements ActionListener {
             changeMainPanel(pnlStatistics);
             state = State.STATISTICS;
         } else if (e.getSource().equals(btnBack)) {
-            changeMainPanel(pnlButton);
+            changeMainPanel(pnlMain);
             state = State.INIT;
         }
         checkBackButton();
