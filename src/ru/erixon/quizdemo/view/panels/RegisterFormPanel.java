@@ -1,11 +1,12 @@
 package ru.erixon.quizdemo.view.panels;
 
-import ru.erixon.quizdemo.view.frames.MainFrame;
+import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public abstract class RegisterFormPanel extends Panel implements ActionListener {
@@ -44,7 +45,7 @@ public abstract class RegisterFormPanel extends Panel implements ActionListener 
         initActions();
     }
 
-    protected abstract void doRegister() throws SQLException;
+    protected abstract void doRegister() throws SQLException, ApplicationException, IOException;
 
     private void initActions() {
         btnRegister.addActionListener(this);
@@ -59,7 +60,7 @@ public abstract class RegisterFormPanel extends Panel implements ActionListener 
             if (source.equals(btnRegister)) {
                 doRegister();
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ApplicationException | IOException ex) {
             throw new RuntimeException(ex);
         }
     }

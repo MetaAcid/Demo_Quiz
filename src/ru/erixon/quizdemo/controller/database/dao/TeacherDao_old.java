@@ -1,5 +1,7 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
+import ru.erixon.quizdemo.model.exceptions.ApplicationException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +15,7 @@ public class TeacherDao_old {
 
     public TeacherDao_old(Connection connection) {this.connection = connection;}
 
-    public void registerNew(String acctName, String passwordHash, String name, String surname) throws SQLException {
+    public void registerNew(String acctName, String passwordHash, String name, String surname) throws SQLException, ApplicationException {
         assertNotEmpty(acctName, "account name");
         assertNotEmpty(passwordHash, "password");
         assertNotEmpty(name, "name");
