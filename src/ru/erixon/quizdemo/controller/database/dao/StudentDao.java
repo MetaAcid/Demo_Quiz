@@ -34,6 +34,6 @@ public class StudentDao extends UserDao<Student> {
 
     @Override
     protected Object[] getParams(Student student) {
-        return new Object[]{student.getAccountName(), student.getPasswordHash(), student.getName(), student.getSurname(), student.getClass()};
+        return new Object[]{student.getAccountName(), student.getPasswordHash(), student.getName(), student.getSurname(), student.getClassId()};
     }
 }

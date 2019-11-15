@@ -7,4 +7,8 @@ public class Student extends User {
         super(id, accountName, name, surname, passwordHash);
         this.classId = classId;
     }
+
+    public String getClassId() {
+        return classId;
+    }
 }

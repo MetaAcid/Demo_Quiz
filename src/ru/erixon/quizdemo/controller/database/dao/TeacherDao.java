@@ -1,14 +1,11 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
-import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.user.Teacher;
-import ru.erixon.quizdemo.utils.Assert;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static ru.erixon.quizdemo.utils.Assert.assertPositive;
 
 public class TeacherDao extends UserDao<Teacher> {
 
