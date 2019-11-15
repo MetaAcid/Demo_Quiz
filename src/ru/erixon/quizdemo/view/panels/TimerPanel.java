@@ -8,12 +8,17 @@ public class TimerPanel extends Panel implements Runnable {
     private static final double MAGIC_CONST = Math.sqrt(3) / 2;
 
     private int hxEdge = 100; //hexagon edge length
+    private int x_coord;
+    private int y_coord;
     private Color hxColor = Color.GREEN;
     private Color tmColor = Color.RED;
     private Timer timer;
     private boolean stop = false;
 
-    public TimerPanel(long seconds) {
+    public TimerPanel(int x_coord, int y_coord, long seconds) {
+        this.x_coord = x_coord;
+        this.y_coord = y_coord;
+        this.setBounds(this.x_coord, this.y_coord, (int) Math.round(MAGIC_CONST*2*hxEdge), 2*hxEdge);
         timer = new Timer(seconds);
         Thread thread = new Thread(this);
         thread.start();
@@ -27,7 +32,6 @@ public class TimerPanel extends Panel implements Runnable {
 
         g.setColor(tmColor);
         g.setFont(getTimerFont());
-//        g.drawString(time, hxEdge-25, hxEdge);
         drawCentered(g,timer.getTime());
     }
 
@@ -43,7 +47,7 @@ public class TimerPanel extends Panel implements Runnable {
     }
 
     private Font getTimerFont() {
-        return new Font("Arial", Font.BOLD, 40);
+        return new Font("Arial", Font.BOLD, 60);
     }
 
     private void drawCentered(Graphics g, String s) {

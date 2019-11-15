@@ -13,6 +13,7 @@ public class StudentFrame extends BaseFrame implements ActionListener {
    private Button btnStudentStat = new Button("Your Statistics");
    private Button btnBack = new Button("Back");
    private Panel pnlMain = new Panel(new BorderLayout());
+   private Panel pnlButtons = new Panel(null);
    private DifficultyPanel pnlDifficulty = new DifficultyPanel();
    private StatisticsPanel pnlStatistics = new StatisticsPanel();
    private State state = State.INIT;
@@ -21,29 +22,30 @@ public class StudentFrame extends BaseFrame implements ActionListener {
 
     public StudentFrame(Window owner, String title) throws HeadlessException {
         super(title);
-        this.setLayout(null);
-        this.setVisible(true);
-        this.setSize(1000, 700);
-        this.setResizable(false);
-        btnBack.setBounds(xOff, yOff - 600, 800, 40);
-        btnPlayQuiz.setBounds(xOff, yOff, 400, 40);
-        btnStudentStat.setBounds(xOff, yOff + 30, 400, 40);
         initButtons();
         initPanels();
         checkBackButton();
+        this.setSize(1000, 700);
+        this.setResizable(false);
+        this.setVisible(true);
     }
 
     private void initButtons() {
         btnPlayQuiz.addActionListener(this);
         btnStudentStat.addActionListener(this);
         btnBack.addActionListener(this);
+        btnBack.setBounds(xOff, yOff - 6, 800, 40);
+        btnPlayQuiz.setBounds(xOff, yOff, 400, 40);
+        btnStudentStat.setBounds(xOff, yOff + 30, 400, 40);
     }
 
     private void initPanels() {
-        this.pnlMain.add(btnBack);
-        this.pnlMain.add(btnPlayQuiz);
-        this.pnlMain.add(btnStudentStat);
+        pnlButtons.add(btnBack);
+        pnlButtons.add(btnPlayQuiz);
+        pnlButtons.add(btnStudentStat);
+        pnlMain.add(pnlButtons,BorderLayout.CENTER);
         this.add(pnlMain);
+
     }
 
     private void changeMainPanel(Panel newPanel){
@@ -59,7 +61,6 @@ public class StudentFrame extends BaseFrame implements ActionListener {
             btnBack.setVisible(false);
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnPlayQuiz)) {
@@ -69,7 +70,7 @@ public class StudentFrame extends BaseFrame implements ActionListener {
             changeMainPanel(pnlStatistics);
             state = State.STATISTICS;
         } else if (e.getSource().equals(btnBack)) {
-            changeMainPanel(pnlMain);
+            changeMainPanel(pnlButtons);
             state = State.INIT;
         }
         checkBackButton();

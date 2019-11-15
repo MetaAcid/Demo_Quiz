@@ -1,9 +1,13 @@
 package ru.erixon.quizdemo.view.panels;
 
+import ru.erixon.quizdemo.model.exceptions.ApplicationException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public abstract class LogInPanel extends Panel implements ActionListener {
     protected JLabel lblAcctName = new JLabel("Account Name:");
@@ -36,12 +40,16 @@ public abstract class LogInPanel extends Panel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.btnLogIn) {
-            login();
+        try {
+            if (e.getSource() == this.btnLogIn) {
+                login();
+            }
+        } catch (SQLException | IOException | ApplicationException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
-    protected void login(){
+    protected void login() throws SQLException, IOException, ApplicationException {
         if (checkLogin()) {
             doLogin();
         }
@@ -50,7 +58,7 @@ public abstract class LogInPanel extends Panel implements ActionListener {
         }
     }
 
-    protected abstract boolean checkLogin();
+    protected abstract boolean checkLogin() throws SQLException, IOException, ApplicationException;
 
     protected abstract void doLogin();
 
