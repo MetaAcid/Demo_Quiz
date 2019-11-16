@@ -10,7 +10,7 @@ import java.io.InputStream;
 public class ImageTools {
     public static InputStream imageToInputStream(BufferedImage image) throws IOException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        ImageIO.write(image,"jpg", os);
+        ImageIO.write(image,"png", os);
         return new ByteArrayInputStream(os.toByteArray());
     }
 }

@@ -1,11 +1,18 @@
 package ru.erixon.quizdemo.view.panels;
 
+import ru.erixon.quizdemo.Application;
+import ru.erixon.quizdemo.controller.database.dao.QuestionDao;
+import ru.erixon.quizdemo.model.exceptions.ApplicationException;
+import ru.erixon.quizdemo.model.question.Question;
 import ru.erixon.quizdemo.view.frames.QuizFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class DifficultyPanel extends Panel implements ActionListener {
     private CheckboxGroup checkboxGroup = new CheckboxGroup();
@@ -16,6 +23,7 @@ public class DifficultyPanel extends Panel implements ActionListener {
     protected Button btnNext = new Button("Next");
     protected int xOff = 350;
     protected int yOff = 50;
+    private QuestionDao questionDao = new QuestionDao(Application.manager.getConnection());
 
     public DifficultyPanel() {
         this.setLayout(null);
@@ -42,8 +50,13 @@ public class DifficultyPanel extends Panel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(btnNext)) {
-            QuizFrame frame = new QuizFrame("Quiz");
+        try {
+            if (e.getSource().equals(btnNext)) {
+                List<Question> questions = questionDao.getQuestionsByParams(1, Question.Difficulty.HARD);
+                QuizFrame frame = new QuizFrame((Window) this.getFocusCycleRootAncestor(), "Quiz", questions);
+            }
+        } catch (SQLException | IOException | ApplicationException ex) {
+            ex.printStackTrace();
         }
         this.validate();
         this.repaint();

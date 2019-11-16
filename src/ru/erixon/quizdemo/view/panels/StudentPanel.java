@@ -18,9 +18,10 @@ public class StudentPanel extends LogInPanel implements ActionListener {
 
     @Override
     protected boolean checkLogin() throws SQLException, IOException, ApplicationException {
-        String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
-        Student student = studentDao.getByLogin(this.txtAcctName.getText(), passwordHash);
-        return student != null;
+        return true;
+//        String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
+//        Student student = studentDao.getByLogin(this.txtAcctName.getText(), passwordHash);
+//        return student != null;
     }
 
     @Override

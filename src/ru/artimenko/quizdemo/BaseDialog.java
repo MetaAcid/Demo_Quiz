@@ -17,7 +17,7 @@ public abstract class BaseDialog extends Dialog {
             }
         };
 
-        this.setModal(true);
+//        this.setModal(true);
         this.addWindowListener(windowAdapter);
 
     }

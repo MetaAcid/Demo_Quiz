@@ -3,26 +3,28 @@ package ru.erixon.quizdemo.view.panels;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import ru.erixon.quizdemo.model.question.Question;
 import ru.erixon.quizdemo.view.frames.MainFrame;
-import ru.erixon.quizdemo.view.frames.QuizFrame;
 
 public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     private Label lblNumberOfQuestion = new Label("№ 'x' out of 'y'");
     private Label lblQuestion = new Label("What is 2 + 2?");
-    private Label lblTypeStudent = new Label("Please, type your answer here:");
+    private Label lblType = new Label("Please, type your answer here:");
     private TextField txtStudentAnswer = new TextField(15);
     private Button btnBackToMainMenu = new Button("Back to Main Menu");
     private Button btnSubmit = new Button("Submit Your Answer");
-    private Panel pnlQuiz = new Panel();
-    private Panel pnlMovement = new Panel();
-    private Panel pnlMain = new Panel();
-    private Panel PanelMain = new Panel();
+    private Panel pnlSouth = new Panel();
+    private List<Question> questionList;
+    private int current = 0;
 
-    public QuizPanel() {
-        movementPanel();
-        quizPanel();
-        this.add(pnlMain);
+    public QuizPanel(List<Question> questionList) {
+        this.questionList = questionList;
+//        this.setBackground(Color.GREEN);
+        initSouth();
         initButtons();
+        this.repaint();
     }
 
     private void initButtons() {
@@ -30,26 +32,24 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         btnSubmit.addActionListener(this);
     }
 
-    private void movementPanel() {
-        pnlMovement.add(btnBackToMainMenu, BorderLayout.EAST);
-        pnlMovement.add(btnSubmit, BorderLayout.WEST);
-        pnlMain.add(pnlMovement);
+    private void initSouth() {
+        pnlSouth.add(btnBackToMainMenu);
+        pnlSouth.add(btnSubmit);
+        pnlSouth.add(lblType);
+        pnlSouth.add(txtStudentAnswer);
+        this.add(pnlSouth, BorderLayout.SOUTH);
     }
 
-    private void quizPanel() {
-        pnlQuiz.add(lblNumberOfQuestion, BorderLayout.NORTH);
-        pnlQuiz.add(lblQuestion, BorderLayout.CENTER);
-        pnlQuiz.add(lblTypeStudent, BorderLayout.SOUTH);
-        pnlQuiz.add(txtStudentAnswer, BorderLayout.SOUTH);
-        pnlMain.add(pnlQuiz);
+
+    @Override
+    public void paint(Graphics g) {
+        g.drawImage(this.questionList.get(current).getImage(),0,0, null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnBackToMainMenu)) {
             MainFrame frame = new MainFrame("Main Menu");
-        } else if (e.getSource().equals(btnSubmit)) {
-            QuizFrame frame = new QuizFrame("Quiz Window");
         }
     }
 }

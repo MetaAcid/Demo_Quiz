@@ -1,19 +1,16 @@
 package ru.erixon.quizdemo.model.question;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 
 public class Question {
     private BufferedImage image;
     private String answer;
+    private Difficulty difficulty;
 
-    public Question(BufferedImage image, String answer) {
+    public Question(BufferedImage image, String answer, Difficulty difficulty) {
         this.image = image;
         this.answer = answer;
+        this.difficulty = difficulty;
     }
 
     public BufferedImage getImage() {
@@ -22,5 +19,13 @@ public class Question {
 
     public String getAnswer() {
         return answer;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public enum Difficulty {
+        EASY, NORMAL, HARD
     }
 }
