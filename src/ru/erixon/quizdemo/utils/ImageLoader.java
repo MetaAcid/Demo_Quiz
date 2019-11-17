@@ -11,7 +11,7 @@ import java.io.*;
 public class ImageLoader {
     public static void main(String[] args) throws Exception {
         QuestionDao questionDao = new QuestionDao(Application.manager.getConnection());
-        File dir  = new File("C:\\Users\\Никита\\Desktop\\Questions Images\\Новая папка");
+        File dir  = new File("C:\\Users\\Никита\\Desktop\\Questions Images\\xx");
         File[] files = dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -38,7 +38,7 @@ public class ImageLoader {
             try (FileReader fileReader = new FileReader(answer); BufferedReader reader = new BufferedReader(fileReader)) {
                 answerText = reader.readLine();
             }
-            Question question = new Question(image,answerText, getDifficulty(imageFile));
+            Question question = new Question(0, image,answerText, getDifficulty(imageFile));
             questionDao.insert(question);
         }
 

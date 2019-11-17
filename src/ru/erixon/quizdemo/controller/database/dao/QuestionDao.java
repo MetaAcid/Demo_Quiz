@@ -45,10 +45,11 @@ public class QuestionDao extends GenericDao<Question> {
     @Override
     protected Question newEntity(ResultSet rs) throws SQLException, ApplicationException {
         try {
+
             InputStream stream = rs.getBinaryStream("image");
             BufferedImage image = ImageIO.read(stream);
             Question.Difficulty difficulty = Question.Difficulty.valueOf(rs.getString("difficulty"));
-            return new Question(image,rs.getString("answer"), difficulty);
+            return new Question(rs.getLong("id"), image,rs.getString("answer"), difficulty);
         } catch (IOException e) {
             throw new ApplicationException("image reading error", e);
         }

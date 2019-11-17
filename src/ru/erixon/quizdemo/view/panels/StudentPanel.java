@@ -11,21 +11,20 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class StudentPanel extends LogInPanel implements ActionListener {
+public class StudentPanel extends LogInPanel<Student> implements ActionListener {
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
 
     public StudentPanel() {}
 
     @Override
-    protected boolean checkLogin() throws SQLException, IOException, ApplicationException {
-        return true;
-//        String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
-//        Student student = studentDao.getByLogin(this.txtAcctName.getText(), passwordHash);
-//        return student != null;
+    protected Student checkLogin() throws SQLException, IOException, ApplicationException {
+        String passwordHash = HashingTools.hash(this.txtPassword.getPassword());
+        return studentDao.getByLogin(this.txtAcctName.getText(), passwordHash);
     }
 
     @Override
-    protected void doLogin() {
-        StudentFrame frame = new StudentFrame(null, "Student Window");
+    protected void doLogin(Student student) {
+        StudentFrame frame = new StudentFrame(null, "Student Window", student);
     }
+
 }

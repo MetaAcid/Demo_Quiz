@@ -15,6 +15,7 @@ import java.awt.image.MemoryImageSource;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,6 +105,10 @@ public abstract class GenericDao<T> {
             else if (params[i] instanceof BufferedImage) {
                 BufferedImage image = (BufferedImage) params[i];
                 ps.setBinaryStream(pIndex, ImageTools.imageToInputStream(image));
+            }
+            else if (params[i] instanceof LocalDate){
+                LocalDate date  = (LocalDate) params[i];
+                ps.setDate(pIndex, Date.valueOf(date));
             } else {
                 throw new RuntimeException("wrong parameterType " + params[i].getClass().getName());
             }

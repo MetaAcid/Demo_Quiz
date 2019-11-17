@@ -3,10 +3,19 @@ package ru.erixon.quizdemo.view.panels;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ru.erixon.quizdemo.Application;
+import ru.erixon.quizdemo.controller.database.dao.ResultsDao;
+import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.question.Question;
-import ru.erixon.quizdemo.view.frames.MainFrame;
+import ru.erixon.quizdemo.model.results.TestResult;
+import ru.erixon.quizdemo.model.user.Student;
 
 public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     private Label lblNumberOfQuestion = new Label("№ 'x' out of 'y'");
@@ -17,10 +26,17 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     private Button btnSubmit = new Button("Submit Your Answer");
     private Panel pnlSouth = new Panel();
     private List<Question> questionList;
-    private int current = 0;
+    private Map<Long,Boolean> resultsTable = new HashMap<>();
+    private volatile int current = 0;
+    private Student student;
 
-    public QuizPanel(List<Question> questionList) {
+    public void setCurrent(int current) {
+        this.current = current;
+    }
+
+    public QuizPanel(List<Question> questionList, Student student) {
         this.questionList = questionList;
+        this.student = student;
 //        this.setBackground(Color.GREEN);
         initSouth();
         initButtons();
@@ -46,10 +62,35 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         g.drawImage(this.questionList.get(current).getImage(),0,0, null);
     }
 
+    private void submitAnswer() {
+        String userInput = txtStudentAnswer.getText();
+        Question question = questionList.get(current);
+        if (userInput.toUpperCase().equals(question.getAnswer().toUpperCase())) {
+            resultsTable.put(question.getId(), true);
+        }
+        else resultsTable.put(question.getId(), false);
+    }
+
+    public void onClose() throws SQLException, IOException, ApplicationException {
+        ResultsDao resultsDao = new ResultsDao(Application.manager.getConnection());
+        TestResult testResult = new TestResult(student, LocalDateTime.now(),resultsTable);
+        resultsDao.insertResult(testResult);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(btnBackToMainMenu)) {
-            MainFrame frame = new MainFrame("Main Menu");
+        Object source = e.getSource();
+        if (source.equals(btnBackToMainMenu)) {
+            try {
+                onClose();
+            } catch (SQLException | IOException | ApplicationException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        else if(source.equals(btnSubmit)){
+            submitAnswer();
         }
     }
+
+
 }

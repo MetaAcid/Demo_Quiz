@@ -5,6 +5,8 @@ import ru.artimenko.quizdemo.BaseFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import ru.erixon.quizdemo.model.user.Student;
 import ru.erixon.quizdemo.view.panels.DifficultyPanel;
 import ru.erixon.quizdemo.view.panels.StatisticsPanel;
 
@@ -14,20 +16,24 @@ public class StudentFrame extends BaseFrame implements ActionListener {
    private Button btnBack = new Button("Back");
    private Panel pnlMain = new Panel(new BorderLayout());
    private Panel pnlButtons = new Panel(null);
-   private DifficultyPanel pnlDifficulty = new DifficultyPanel();
-   private StatisticsPanel pnlStatistics = new StatisticsPanel();
+   private DifficultyPanel pnlDifficulty;
+   private StatisticsPanel pnlStatistics;
    private State state = State.INIT;
    protected int xOff = 350;
    protected int yOff = 50;
+   private Student student;
 
-    public StudentFrame(Window owner, String title) throws HeadlessException {
+    public StudentFrame(Window owner, String title, Student student) throws HeadlessException {
         super(title);
+        this.student = student;
         initButtons();
         initPanels();
         checkBackButton();
         this.setSize(1000, 700);
         this.setResizable(false);
         this.setVisible(true);
+        pnlStatistics = new StatisticsPanel(student);
+        pnlDifficulty = new DifficultyPanel(student);
     }
 
     private void initButtons() {

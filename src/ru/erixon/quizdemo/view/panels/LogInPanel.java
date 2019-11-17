@@ -1,6 +1,7 @@
 package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
+import ru.erixon.quizdemo.model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public abstract class LogInPanel extends Panel implements ActionListener {
+public abstract class LogInPanel<T extends User> extends Panel implements ActionListener {
     protected JLabel lblAcctName = new JLabel("Account Name:");
     protected JLabel lblPassword = new JLabel("Password:");
     protected JTextField txtAcctName = new JTextField();
@@ -50,16 +51,17 @@ public abstract class LogInPanel extends Panel implements ActionListener {
     }
 
     protected void login() throws SQLException, IOException, ApplicationException {
-        if (checkLogin()) {
-            doLogin();
+        T t = checkLogin();
+        if (t != null) {
+            doLogin(t);
         }
         else {
             throw new RuntimeException("Incorrect Log In or Password!");
         }
     }
 
-    protected abstract boolean checkLogin() throws SQLException, IOException, ApplicationException;
+    protected abstract T checkLogin() throws SQLException, IOException, ApplicationException;
 
-    protected abstract void doLogin();
+    protected abstract void doLogin(T t);
 
 }
