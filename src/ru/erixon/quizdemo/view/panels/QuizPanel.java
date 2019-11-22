@@ -19,7 +19,7 @@ import ru.erixon.quizdemo.model.user.Student;
 
 public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     private Label lblType = new Label("Please, type your answer here:");
-    private TextField txtStudentAnswer = new TextField(15);
+    private TextField txtStudentAnswer = new TextField(50);
     private Button btnBackToMainMenu = new Button("Back to Main Menu");
     private Button btnSubmit = new Button("Submit Your Answer");
     private Panel pnlSouth = new Panel();
@@ -46,11 +46,16 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     }
 
     private void initSouth() {
+        setLayout(null);
+        btnSubmit.setBounds(1100, 600, 400, 300);
+        txtStudentAnswer.setBounds(800, 400, 400, 400);
+        lblType.setBounds(600, 400, 200, 400);
+        btnBackToMainMenu.setBounds(1100, 400, 400, 300);
         pnlSouth.add(btnBackToMainMenu);
         pnlSouth.add(btnSubmit);
         pnlSouth.add(lblType);
         pnlSouth.add(txtStudentAnswer);
-        this.add(pnlSouth, BorderLayout.SOUTH);
+        this.add(pnlSouth);
     }
 
 

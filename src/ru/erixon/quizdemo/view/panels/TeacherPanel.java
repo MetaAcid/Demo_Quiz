@@ -33,7 +33,7 @@ public class TeacherPanel extends LogInPanel<Teacher> {
 
     @Override
     protected void doLogin(Teacher teacher) {
-        TeacherFrame frame = new TeacherFrame("Teacher Window");
+        TeacherFrame frame = new TeacherFrame(null,"Teacher Window", teacher);
     }
 
 }

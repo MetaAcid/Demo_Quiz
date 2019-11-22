@@ -1,6 +1,7 @@
 package ru.erixon.quizdemo.view.frames;
 
 import ru.artimenko.quizdemo.BaseFrame;
+import ru.erixon.quizdemo.model.user.Teacher;
 import ru.erixon.quizdemo.view.panels.StudentChooseStatPanel;
 import ru.erixon.quizdemo.view.panels.ClassStatPanel;
 import ru.erixon.quizdemo.view.panels.StudentSingleStatPanel;
@@ -12,8 +13,8 @@ import java.awt.event.ActionListener;
 public class TeacherFrame extends BaseFrame implements ActionListener {
 
     private ClassStatPanel classStatPanel = new ClassStatPanel();
-    private StudentChooseStatPanel studentChooseStatPanel = new StudentChooseStatPanel();
-    private StudentSingleStatPanel studentSingleStatPanel = new StudentSingleStatPanel();
+    private StudentChooseStatPanel studentChooseStatPanel;
+    private StudentSingleStatPanel studentSingleStatPanel;
     private Button btnClassStat = new Button("Class Statistics");
     private Button btnStudentStat = new Button("Student Statistics");
     private Panel pnlButtons = new Panel();
@@ -21,13 +22,16 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
     private TeacherFrame.State state = TeacherFrame.State.INIT;
     private Panel pnlMain = new Panel();
     private Button btnNext = new Button("Next");
+    private Teacher teacher;
 
-    public TeacherFrame(String title) throws HeadlessException {
+    public TeacherFrame(Window owner, String title, Teacher teacher) throws HeadlessException {
         super(title);
         this.setVisible(true);
         this.setSize(1000, 700);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
+        studentChooseStatPanel = new StudentChooseStatPanel(teacher);
+        studentSingleStatPanel = new StudentSingleStatPanel(teacher);
         initButtons();
         initPanels();
         checkBackButton();

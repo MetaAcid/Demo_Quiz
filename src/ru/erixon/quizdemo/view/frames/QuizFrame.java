@@ -12,7 +12,7 @@ import ru.erixon.quizdemo.view.panels.TimerPanel;
 import javax.swing.*;
 
 public class QuizFrame extends JDialog {
-    private TimerPanel timerPanel = new TimerPanel(0, 100, 100);
+    private TimerPanel timerPanel = new TimerPanel(0, 20, 100);
     private QuizPanel pnlQuiz;
     private QuestionButtonsPanel pnlButton;
 

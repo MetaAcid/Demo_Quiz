@@ -1,5 +1,7 @@
 package ru.erixon.quizdemo.view.panels;
 
+import ru.erixon.quizdemo.model.user.Teacher;
+
 import java.awt.*;
 
 public class StudentChooseStatPanel extends BorderLayoutPanel{
@@ -11,7 +13,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel{
     private Panel pnlStudentInfo = new Panel();
     private Panel pnlMain = new Panel();
 
-    public StudentChooseStatPanel() {
+    public StudentChooseStatPanel(Teacher teacher) {
         studentInfo();
         this.add(pnlMain, BorderLayout.CENTER);
     }
