@@ -41,9 +41,6 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
     private void initPanels() {
         initWelcomePanel();
-        initRegisterPanel();
-        initTeacherPanel();
-        initStudentPanel();
         this.add(buttonPanel, BorderLayout.NORTH);
         this.add(mainPanel, BorderLayout.CENTER);
         this.mainPanel.setLayout(new BorderLayout());
@@ -54,18 +51,6 @@ public class MainFrame extends BaseFrame implements ActionListener {
     private void initWelcomePanel() {
         lblWelcome.setSize(200, 50);
         this.welcomePanel.add(lblWelcome);
-    }
-
-    private void initRegisterPanel() {
-
-    }
-
-    private void initTeacherPanel() {
-
-    }
-
-    private void initStudentPanel() {
-
     }
 
     private void changeMainPanel(Panel newPanel){
@@ -87,9 +72,5 @@ public class MainFrame extends BaseFrame implements ActionListener {
 
         this.mainPanel.validate();
         this.mainPanel.repaint();
-    }
-
-    private enum State {
-        REGISTER, STUDENT, TEACHER
     }
 }

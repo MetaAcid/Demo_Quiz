@@ -1,9 +1,7 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
-import ru.erixon.quizdemo.Application;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.user.User;
-import ru.erixon.quizdemo.utils.Assert;
 
 import java.io.IOException;
 import java.sql.Connection;

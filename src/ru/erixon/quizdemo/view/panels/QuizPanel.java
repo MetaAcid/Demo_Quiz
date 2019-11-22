@@ -18,8 +18,6 @@ import ru.erixon.quizdemo.model.results.TestResult;
 import ru.erixon.quizdemo.model.user.Student;
 
 public class QuizPanel extends BorderLayoutPanel implements ActionListener {
-    private Label lblNumberOfQuestion = new Label("№ 'x' out of 'y'");
-    private Label lblQuestion = new Label("What is 2 + 2?");
     private Label lblType = new Label("Please, type your answer here:");
     private TextField txtStudentAnswer = new TextField(15);
     private Button btnBackToMainMenu = new Button("Back to Main Menu");
@@ -37,7 +35,6 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     public QuizPanel(List<Question> questionList, Student student) {
         this.questionList = questionList;
         this.student = student;
-//        this.setBackground(Color.GREEN);
         initSouth();
         initButtons();
         this.repaint();

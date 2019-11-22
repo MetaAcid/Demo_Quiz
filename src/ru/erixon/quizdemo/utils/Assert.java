@@ -1,6 +1,5 @@
 package ru.erixon.quizdemo.utils;
 
-import ru.erixon.quizdemo.Application;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 
 public class Assert {
