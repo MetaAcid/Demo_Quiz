@@ -21,8 +21,8 @@ public class QuizFrame extends JDialog {
         pnlQuiz = new QuizPanel(questions, student);
         initButtonPanel(questions.size());
         this.setLayout(null);
-        pnlQuiz.setBounds(200, 0, 1300, 950);
-        this.setSize(1500, 1000);
+        pnlQuiz.setBounds(200, 0, 1600, 970);
+        this.setSize(1800, 1000);//1920X1080
         this.add(pnlQuiz);
         this.add(timerPanel);
         this.setVisible(true);

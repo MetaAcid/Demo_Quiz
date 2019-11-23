@@ -25,7 +25,7 @@ public class QuestionDao extends GenericDao<Question> {
     }
 
     public List<Question> getQuestionsByParams(int qty, Question.Difficulty difficulty) throws SQLException, IOException, ApplicationException {
-        String sql = "select * from questions where difficulty = ? order by random()";
+        String sql = String.format("select * from %s where difficulty = ? order by random()", getTableFullName());
         ResultSet rs = super.executeSelect(sql, difficulty.name());
         List<Question> list = new ArrayList<>();
         boolean b =  true;

@@ -11,7 +11,7 @@ import java.io.*;
 public class ImageLoader {
     public static void main(String[] args) throws Exception {
         QuestionDao questionDao = new QuestionDao(Application.manager.getConnection());
-        File dir  = new File("C:\\Users\\Никита\\Desktop\\Questions Images\\xx");
+        File dir  = new File("C:\\Users\\erixon\\Desktop\\crap\\nikita\\image_load");
         File[] files = dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {

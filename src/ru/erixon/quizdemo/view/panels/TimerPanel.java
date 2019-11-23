@@ -62,7 +62,6 @@ public class TimerPanel extends Panel implements Runnable {
         while (this.isShowing() || !stop) {
             try {
                 stop = true;
-                System.out.println("!");
                 Thread.sleep(990);
                 this.repaint();
             } catch (InterruptedException ignore) {

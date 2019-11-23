@@ -51,11 +51,16 @@ public class DifficultyPanel extends Panel implements ActionListener {
 
     }
 
+    private Question.Difficulty getChosenDifficulty() {
+        //todo
+        return Question.Difficulty.HARD;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getSource().equals(btnNext)) {
-                List<Question> questions = questionDao.getQuestionsByParams(3, Question.Difficulty.EASY);
+                List<Question> questions = questionDao.getQuestionsByParams(3, getChosenDifficulty());
                 QuizFrame frame = new QuizFrame((Window) this.getFocusCycleRootAncestor(), "Quiz", questions, this.student);
             }
         } catch (SQLException | IOException | ApplicationException ex) {
