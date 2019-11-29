@@ -23,10 +23,6 @@ public class TeacherDao extends UserDao<Teacher> {
         return new Object[]{teacher.getAccountName(), teacher.getPasswordHash(), teacher.getName(), teacher.getSurname()};
     }
 
-    @Override
-    public void createTable() {
-
-    }
 
     @Override
     protected Teacher newEntity(ResultSet rs) throws SQLException {

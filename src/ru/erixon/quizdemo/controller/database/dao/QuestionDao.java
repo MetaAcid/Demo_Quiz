@@ -37,10 +37,6 @@ public class QuestionDao extends GenericDao<Question> {
         rs.close();
         return list;
     }
-    @Override
-    public void createTable() {
-
-    }
 
     @Override
     protected Question newEntity(ResultSet rs) throws SQLException, ApplicationException {

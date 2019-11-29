@@ -1,25 +1,15 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
-
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import ru.erixon.quizdemo.Application;
 import ru.erixon.quizdemo.controller.utils.ImageTools;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
-import ru.erixon.quizdemo.utils.Assert;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
-import javax.imageio.stream.MemoryCacheImageOutputStream;
 import java.awt.image.BufferedImage;
-import java.awt.image.MemoryImageSource;
 import java.io.*;
-import java.nio.ByteBuffer;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ru.erixon.quizdemo.utils.Assert.assertPositive;
 
 public abstract class GenericDao<T> {
     private final Connection connection;
@@ -28,8 +18,6 @@ public abstract class GenericDao<T> {
     public GenericDao(Connection connection) {
         this.connection = connection;
     }
-
-    public abstract void createTable();
 
     protected abstract T newEntity(ResultSet rs) throws SQLException, ApplicationException;
 

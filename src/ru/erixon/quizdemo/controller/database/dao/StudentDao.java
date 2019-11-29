@@ -18,11 +18,6 @@ public class StudentDao extends UserDao<Student> {
     }
 
     @Override
-    public void createTable() {
-
-    }
-
-    @Override
     protected Student newEntity(ResultSet rs) throws SQLException, ApplicationException {
         return new Student(rs.getLong("id"),rs.getString("account_name"), rs.getString("name"), rs.getString("surname"), rs.getString("password_hash"), rs.getString("class_id"));
     }

@@ -30,11 +30,6 @@ public class ResultsDao extends GenericDao<TestResult> {
     }
 
     @Override
-    public void createTable() {
-
-    }
-
-    @Override
     protected TestResult newEntity(ResultSet rs) throws SQLException, ApplicationException {
         return null;
     }

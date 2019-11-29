@@ -13,8 +13,10 @@ public class GraphicsFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        int[] x = {0,100,500};
-        int[] y = {0,50,400};
-        g.drawPolygon(x, y, 3);
+        int[] x1 = { 350, 350, 400, 400};
+        int[] y1 = {350, 450, 450, 350};
+        g.drawLine(50, 50, 50, 350);
+        g.drawLine(50, 350, 350, 350);
+        g.drawPolygon(x1, y1, 4);
     }
 }
