@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,9 +95,13 @@ public abstract class GenericDao<T> {
                 BufferedImage image = (BufferedImage) params[i];
                 ps.setBinaryStream(pIndex, ImageTools.imageToInputStream(image));
             }
-            else if (params[i] instanceof LocalDate){
-                LocalDate date  = (LocalDate) params[i];
+            else if (params[i] instanceof LocalDate) {
+                LocalDate date = (LocalDate) params[i];
                 ps.setDate(pIndex, Date.valueOf(date));
+            }
+            else if (params[i] instanceof LocalDateTime) {
+                LocalDateTime localDateTime = (LocalDateTime) params[i];
+                ps.setTimestamp(pIndex, Timestamp.valueOf(localDateTime));
             } else {
                 throw new RuntimeException("wrong parameterType " + params[i].getClass().getName());
             }
