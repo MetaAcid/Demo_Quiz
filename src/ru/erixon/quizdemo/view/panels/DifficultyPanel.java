@@ -53,16 +53,14 @@ public class DifficultyPanel extends Panel implements ActionListener {
     }
 
     private Question.Difficulty getChosenDifficulty() {
-        if (cbNormal.getState() == true) {
+        if (cbNormal.getState()) {
             return Question.Difficulty.NORMAL;
-        } else if (cbEasy.getState() == true) {
+        } else if (cbEasy.getState()) {
             return Question.Difficulty.EASY;
-        } else if (cbHard.getState() == true) {
+        } else if (cbHard.getState()) {
             return Question.Difficulty.HARD;
         }
-        else {
-           return null;
-        }
+         else throw new RuntimeException();
     }
 
     @Override
@@ -77,5 +75,9 @@ public class DifficultyPanel extends Panel implements ActionListener {
         }
         this.validate();
         this.repaint();
+    }
+
+    private enum State {
+        TRUE, FALSE
     }
 }

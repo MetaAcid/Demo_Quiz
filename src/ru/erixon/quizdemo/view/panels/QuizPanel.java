@@ -127,11 +127,8 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     }
 
     public void renderNextQuestion() {
-        //clear input, etc
 
-
-
-
+        txtStudentAnswer.setText("");
         this.repaint();
     }
 
