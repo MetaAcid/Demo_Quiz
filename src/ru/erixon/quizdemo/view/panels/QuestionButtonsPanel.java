@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionButtonsPanel extends Panel implements ActionListener {
-    private int size;
+    protected int size;
     private QuizPanel quizPanel;
     private boolean[] blackList;
-    private List<Button> buttons = new ArrayList<>();
+    protected List<Button> buttons = new ArrayList<>();
     public boolean[] getBlackList() {
         return blackList;
     }
@@ -35,7 +35,7 @@ public class QuestionButtonsPanel extends Panel implements ActionListener {
 
     @Override
     public void paint(Graphics g) {
-        Color color = Color.GREEN;
+        Color color = Color.GRAY;
         for (int i = 0; i < buttons.size(); i++) {
             Button button = buttons.get(i);
             if (blackList[i]){

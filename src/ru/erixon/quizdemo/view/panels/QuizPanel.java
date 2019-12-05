@@ -28,9 +28,8 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     private Map<Long,Boolean> resultsTable = new HashMap<>();
     private volatile int current = 0;
     private Student student;
-    private int image_width = 800;
-    private int image_height = 800;
     private QuestionButtonsPanel questionButtonsPanel;
+    private int size;
 
     public void setQuestionButtonsPanel(QuestionButtonsPanel questionButtonsPanel) {
         this.questionButtonsPanel = questionButtonsPanel;
@@ -55,8 +54,8 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
 
     private void initSouth() {
         pnlSouth.setLayout(null);
-//        pnlSouth.setBackground(Color.GREEN);
         pnlSouth.setSize(this.getWidth(), 200);
+        int image_width = 800;
         lblType.setBounds(400, 0, image_width, 20);
         txtStudentAnswer.setBounds(400, 30, image_width, 170);
         btnSubmit.setBounds(image_width + 400 + 100, 30, 200, 70);
@@ -74,7 +73,8 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         BufferedImage image = this.questionList.get(current).getImage();
         int height = image.getHeight();
         int width = image.getWidth();
-        float scaleFactor = (float) image_height/height;
+        int image_height = 800;
+        float scaleFactor = (float) image_height /height;
         Image scaledImage = image.getScaledInstance(Math.round(width*scaleFactor), Math.round(height*scaleFactor), Image.SCALE_DEFAULT);
         g.drawImage(scaledImage,0,0, null);
     }
@@ -94,13 +94,25 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         checkAllQuestionsIsAnswered();
     }
 
+    private void changeToResults() {
+        for (int i = 0; i < questionButtonsPanel.buttons.size; i++) {
+            Color clrTrue = Color.GREEN;
+            Color clrFalse = Color.RED;
+            Question question = questionList.get(current);
+            if (resultsTable.get(question.getAnswer()) == true) {
+                Button btn = questionButtonsPanel.buttons.get (i);
+                btn.setBackground(clrTrue);
+            } else if (resultsTable.get(question.getAnswer()) == false) {
+                Button btn = questionButtonsPanel.buttons.get (i);
+                btn.setBackground(clrFalse);
+            }
+        }
+
+    }
+
     private void checkAllQuestionsIsAnswered() {
         if (resultsTable.size() == questionList.size()) {
-            try {
-                onClose();
-            } catch (SQLException | IOException | ApplicationException e) {
-                throw new RuntimeException(e);
-            }
+                changeToResults();
         }
     }
 
