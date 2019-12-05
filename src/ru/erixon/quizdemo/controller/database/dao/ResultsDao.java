@@ -43,4 +43,6 @@ public class ResultsDao extends GenericDao<TestResult> {
     protected Object[] getParams(TestResult testResult) {
         return new Object[]{testResult.getStudent().getId(), testResult.getDate()};
     }
+
+
 }

@@ -83,7 +83,7 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
         String userInput = txtStudentAnswer.getText();
         Question question = questionList.get(current);
 
-        questionButtonsPanel.getBlackList()[current] = true;
+        questionButtonsPanel.getButtons().get(current).setBackground(Color.GRAY);
         questionButtonsPanel.repaint();
 
         if (userInput.toUpperCase().equals(question.getAnswer().toUpperCase())) {
@@ -95,19 +95,18 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     }
 
     private void changeToResults() {
-        for (int i = 0; i < questionButtonsPanel.buttons.size; i++) {
-            Color clrTrue = Color.GREEN;
-            Color clrFalse = Color.RED;
-            Question question = questionList.get(current);
-            if (resultsTable.get(question.getAnswer()) == true) {
-                Button btn = questionButtonsPanel.buttons.get (i);
-                btn.setBackground(clrTrue);
-            } else if (resultsTable.get(question.getAnswer()) == false) {
-                Button btn = questionButtonsPanel.buttons.get (i);
-                btn.setBackground(clrFalse);
+        for (int i = 0; i < this.questionList.size(); i++) {
+            Question question = questionList.get(i);
+            Color color;
+            if (resultsTable.get(question.getId())) {
+                color = Color.GREEN;
             }
+            else {
+                color = Color.RED;
+            }
+            questionButtonsPanel.getButtons().get(i).setBackground(color);
         }
-
+        questionButtonsPanel.repaint();
     }
 
     private void checkAllQuestionsIsAnswered() {

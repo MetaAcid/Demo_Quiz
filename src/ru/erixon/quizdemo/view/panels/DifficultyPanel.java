@@ -67,7 +67,7 @@ public class DifficultyPanel extends Panel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getSource().equals(btnNext)) {
-                List<Question> questions = questionDao.getQuestionsByParams(3, getChosenDifficulty());
+                List<Question> questions = questionDao.getQuestionsByParams(10, getChosenDifficulty());
                 QuizFrame frame = new QuizFrame((Window) this.getFocusCycleRootAncestor(), "Quiz", questions, this.student);
             }
         } catch (SQLException | IOException | ApplicationException ex) {

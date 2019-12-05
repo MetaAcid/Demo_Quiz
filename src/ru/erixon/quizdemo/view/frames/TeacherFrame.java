@@ -18,10 +18,8 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
     private Button btnClassStat = new Button("Class Statistics");
     private Button btnStudentStat = new Button("Student Statistics");
     private Panel pnlButtons = new Panel();
-    private Button btnBack = new Button("Back");
     private TeacherFrame.State state = TeacherFrame.State.INIT;
     private Panel pnlMain = new Panel();
-    private Button btnNext = new Button("Next");
     private Teacher teacher;
 
     public TeacherFrame(Window owner, String title, Teacher teacher) throws HeadlessException {
@@ -34,37 +32,13 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
         studentSingleStatPanel = new StudentSingleStatPanel(teacher);
         initButtons();
         initPanels();
-        checkBackButton();
-        checkNextButton();
     }
 
     private void initButtons() {
         btnClassStat.addActionListener(this);
         btnStudentStat.addActionListener(this);
-        btnNext.addActionListener(this);
-        btnBack.addActionListener(this);
         pnlButtons.add(btnStudentStat);
         pnlButtons.add(btnClassStat);
-        this.add(btnBack, BorderLayout.SOUTH);
-        this.add(btnNext, BorderLayout.NORTH);
-    }
-
-    private void checkNextButton(){
-        if (state == State.CHOOSE_STUDENT_STAT){
-            btnNext.setVisible(true);
-        }
-        else {
-            btnNext.setVisible(false);
-        }
-    }
-
-    private void checkBackButton(){
-        if (state != TeacherFrame.State.INIT){
-            btnBack.setVisible(true);
-        }
-        else {
-            btnBack.setVisible(false);
-        }
     }
 
     private void initPanels() {
@@ -85,19 +59,10 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
         } else if (e.getSource().equals(btnStudentStat)) {
             changeMainPanel(studentChooseStatPanel);
             state = State.CHOOSE_STUDENT_STAT;
-        } else if (e.getSource().equals(btnBack)) {
-            changeMainPanel(pnlButtons);
-            state = State.INIT;
-        } else if (e.getSource().equals(btnNext)) {
-            changeMainPanel(studentSingleStatPanel);
-            state = State.STUDENT_STAT;
+            this.pnlMain.validate();
+            this.pnlMain.repaint();
         }
-        checkBackButton();
-        checkNextButton();
-        this.pnlMain.validate();
-        this.pnlMain.repaint();
     }
-
 
     private enum State {
         INIT, STUDENT_STAT, CLASS_STAT, CHOOSE_STUDENT_STAT

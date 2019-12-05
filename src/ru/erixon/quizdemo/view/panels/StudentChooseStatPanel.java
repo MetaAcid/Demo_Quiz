@@ -16,20 +16,15 @@ import java.util.List;
 
 public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionListener {
 
-    private Label lblStuName = new Label("Student Name:");
-    private Label lblClassID = new Label("Student Class:");
-    private TextField txtStuName = new TextField(15);
-    private TextField txtClassID = new TextField(15);
-    private Panel pnlStudentInfo = new Panel();
-    private Panel pnlMain = new Panel();
     private JComboBox lstClass = new JComboBox();
     private JComboBox lstStudent = new JComboBox();
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
+    private JTable tblStat = new JTable(3,4);
 
     public StudentChooseStatPanel(Teacher teacher) {
-        studentInfo();
+        initComponents();
         initClassList();
-        this.add(pnlMain, BorderLayout.CENTER);
+        this.setBackground(Color.GRAY);
     }
 
     private void initClassList() {
@@ -43,20 +38,24 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         }
     }
 
-    private void studentInfo() {
-        pnlStudentInfo.add(lblStuName);
-        pnlStudentInfo.add(txtStuName);
-        pnlStudentInfo.add(lblClassID);
-        pnlStudentInfo.add(txtClassID);
-        pnlStudentInfo.add(lstClass);
-        pnlStudentInfo.add(lstStudent);
-        pnlMain.add(pnlStudentInfo);
+    private void initComponents() {
+        Panel panel = new Panel();
+        panel.add(lstClass);
+        panel.add(lstStudent);
+        this.add(panel, BorderLayout.NORTH);
+        this.add(tblStat, BorderLayout.CENTER);
     }
+
+
 
     private void initListStudent() {
         List<Student> studentsByClass;
+        lstStudent.removeAllItems();
         try {
             studentsByClass = studentDao.getStudentsByClass(lstClass.getSelectedItem().toString());
+            for (Student s: studentsByClass) {
+                lstStudent.addItem(s.getName() + s.getSurname());
+            }
         } catch (SQLException | IOException | ApplicationException e) {
             throw new RuntimeException(e);
         }
@@ -64,9 +63,16 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println();
-        if (e.getSource().equals(lstClass)) {
-
+        Object source = e.getSource();
+        if (source.equals(lstClass)) {
+            initListStudent();
         }
+        else if (source.equals(lstStudent)){
+            initTable();
+        }
+    }
+
+    private void initTable() {
+
     }
 }
