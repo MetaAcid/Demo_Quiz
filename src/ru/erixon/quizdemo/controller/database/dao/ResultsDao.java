@@ -44,5 +44,13 @@ public class ResultsDao extends GenericDao<TestResult> {
         return new Object[]{testResult.getStudent().getId(), testResult.getDate()};
     }
 
+    protected ResultSet getStat(String date, boolean verdict, String difficulty, long testNum) throws SQLException, IOException, ApplicationException {
+        String sql = " select test_date from test_results;\n" +
+                "select verdict from test_results_details;\n" +
+                "select difficulty from questions;\n" +
+                "select test_results_id from test_results_details;";
+        ResultSet rs = executeSelect(sql, date, verdict, difficulty, testNum);
+        return (ResultSet) newEntity(rs);
+    }
 
 }

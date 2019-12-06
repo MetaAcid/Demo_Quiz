@@ -46,8 +46,6 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         this.add(tblStat, BorderLayout.CENTER);
     }
 
-
-
     private void initListStudent() {
         List<Student> studentsByClass;
         lstStudent.removeAllItems();
