@@ -1,6 +1,7 @@
 package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.Application;
+import ru.erixon.quizdemo.controller.database.dao.ResultsDao;
 import ru.erixon.quizdemo.controller.database.dao.StudentDao;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.user.Student;
@@ -12,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionListener {
@@ -19,7 +21,9 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     private JComboBox lstClass = new JComboBox();
     private JComboBox lstStudent = new JComboBox();
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
+    private ResultsDao resultsDao = new ResultsDao(Application.manager.getConnection());
     private JTable tblStat = new JTable(3,4);
+
 
     public StudentChooseStatPanel(Teacher teacher) {
         initComponents();
@@ -71,6 +75,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     }
 
     private void initTable() {
-
+        tblStat.setSize(300, 300);
+        tblStat.add(resultsDao.getStat);
     }
 }

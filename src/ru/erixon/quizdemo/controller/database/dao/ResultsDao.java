@@ -2,6 +2,7 @@ package ru.erixon.quizdemo.controller.database.dao;
 
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.results.TestResult;
+import ru.erixon.quizdemo.model.user.Student;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -31,7 +32,7 @@ public class ResultsDao extends GenericDao<TestResult> {
 
     @Override
     protected TestResult newEntity(ResultSet rs) throws SQLException, ApplicationException {
-        return null;
+        return new TestResult (rs.getString("id"), rs.getDate("test_date"), rs.getString("difficulty"), rs.getBoolean("verdict"));
     }
 
     @Override
@@ -44,13 +45,14 @@ public class ResultsDao extends GenericDao<TestResult> {
         return new Object[]{testResult.getStudent().getId(), testResult.getDate()};
     }
 
-    protected ResultSet getStat(String date, boolean verdict, String difficulty, long testNum) throws SQLException, IOException, ApplicationException {
+
+    protected Object[] getStat(String date, boolean verdict, String difficulty, long testNum) throws SQLException, IOException, ApplicationException {
         String sql = " select test_date from test_results;\n" +
                 "select verdict from test_results_details;\n" +
                 "select difficulty from questions;\n" +
                 "select test_results_id from test_results_details;";
         ResultSet rs = executeSelect(sql, date, verdict, difficulty, testNum);
-        return (ResultSet) newEntity(rs);
+        return new Object[] {rs};
     }
 
 }
