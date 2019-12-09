@@ -4,6 +4,7 @@ import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.results.TestResult;
 import ru.erixon.quizdemo.model.user.Student;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -46,7 +47,7 @@ public class ResultsDao extends GenericDao<TestResult> {
     }
 
 
-    protected Object[] getStat(TestResult testResult) throws SQLException, IOException, ApplicationException {
+    public Object[] getStat(TestResult testResult) throws SQLException, IOException, ApplicationException {
         String sql = " select test_date from test_results;\n" +
                 "select verdict from test_results_details;\n" +
                 "select difficulty from questions;\n" +

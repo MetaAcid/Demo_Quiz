@@ -28,6 +28,7 @@ public class TestResult {
         this.verdict = verdict;
     }
 
+
     public  String getId() {return id;}
 
     public Date getTest_date() {return test_date;}
