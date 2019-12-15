@@ -49,9 +49,7 @@ public abstract class GenericDao<T> {
             if (ps.execute()) {
 
                 ResultSet rs = ps.getResultSet();
-                if (rs.next()) {
-                    return rs;
-                }
+                return rs;
             }
         } catch (SQLException | IOException e) {
             throw new ApplicationException(e);
@@ -139,7 +137,7 @@ public abstract class GenericDao<T> {
         return String.join(",", columns);
     }
 
-    public T getById(long id) throws ApplicationException {
+    public T findById(long id) throws ApplicationException {
         String sql = String.format("select %s from %s where id = ?", getColumnList(), getTableFullName());
         ResultSet rs = executeSelect(sql, id);
         return newEntity(rs);
