@@ -20,7 +20,7 @@ public abstract class GenericDao<T> {
         this.connection = connection;
     }
 
-    protected abstract T newEntity(ResultSet rs) throws SQLException, ApplicationException;
+    protected abstract T newEntity(ResultSet rs) throws ApplicationException;
 
     protected abstract String getTableName();
 
@@ -30,36 +30,48 @@ public abstract class GenericDao<T> {
         return Application.config.getSchema() + "." + getTableName();
     }
 
-    public final long insert(T t) throws ApplicationException, SQLException, IOException {
+    public final long insert(T t) throws ApplicationException {
         String sqlInsert = insertSql();
 
         Object[] params = getParams(t);
         ResultSet rs = executeUpdate(sqlInsert, params);
-        return rs.getLong("id");
 
+        try {
+            return rs.getLong("id");
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
+        }
     }
 
-    protected ResultSet executeSelect(String sql, Object... params) throws ApplicationException, SQLException, IOException {
-        PreparedStatement ps = prepare(sql, params);
-        if (ps.execute()) {
+    protected ResultSet executeSelect(String sql, Object... params) throws ApplicationException {
+        try {
+            PreparedStatement ps = prepare(sql, params);
+            if (ps.execute()) {
 
-            ResultSet rs = ps.getResultSet();
-            if (rs.next()) {
-                return rs;
+                ResultSet rs = ps.getResultSet();
+                if (rs.next()) {
+                    return rs;
+                }
             }
+        } catch (SQLException | IOException e) {
+            throw new ApplicationException(e);
         }
 
         throw new ApplicationException("sql execution error");
     }
 
-    protected ResultSet executeUpdate(String sql, Object... params) throws ApplicationException, SQLException, IOException {
-        PreparedStatement ps = prepare(sql, true, params);
-        int rows = ps.executeUpdate();
-        System.out.println(String.format("changed %d rows", rows));
-        ResultSet rs = ps.getGeneratedKeys();
+    protected ResultSet executeUpdate(String sql, Object... params) throws ApplicationException {
+        try {
+            PreparedStatement ps = prepare(sql, true, params);
+            int rows = ps.executeUpdate();
+            System.out.println(String.format("changed %d rows", rows));
+            ResultSet rs = ps.getGeneratedKeys();
 
-        if (rs.next())
-            return rs;
+            if (rs.next())
+                return rs;
+        } catch (SQLException | IOException e) {
+            throw new ApplicationException(e);
+        }
 
         throw new ApplicationException("SqlError");
     }
@@ -127,7 +139,7 @@ public abstract class GenericDao<T> {
         return String.join(",", columns);
     }
 
-    public T getById(long id) throws SQLException, ApplicationException, IOException {
+    public T getById(long id) throws ApplicationException {
         String sql = String.format("select %s from %s where id = ?", getColumnList(), getTableFullName());
         ResultSet rs = executeSelect(sql, id);
         return newEntity(rs);

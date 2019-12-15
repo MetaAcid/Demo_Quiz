@@ -1,10 +1,9 @@
 package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.Application;
-import ru.erixon.quizdemo.controller.database.dao.ResultsDao;
+import ru.erixon.quizdemo.controller.database.dao.ResultsDao_old;
 import ru.erixon.quizdemo.controller.database.dao.StudentDao;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
-import ru.erixon.quizdemo.model.results.TestResult;
 import ru.erixon.quizdemo.model.user.Student;
 import ru.erixon.quizdemo.model.user.Teacher;
 
@@ -13,9 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionListener {
@@ -23,7 +20,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     private JComboBox lstClass = new JComboBox();
     private JComboBox lstStudent = new JComboBox();
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
-    ResultsDao resultsDao = new ResultsDao(Application.manager.getConnection());
+    ResultsDao_old resultsDaoOld = new ResultsDao_old(Application.manager.getConnection());
     private JTable tblStat = new JTable(3,4);
 
     public StudentChooseStatPanel(Teacher teacher) {
@@ -76,9 +73,9 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     }
 
     private void initTable() {
-        TestResult testResult;
-        testResult = new TestResult();
-        tblStat.setSize(300, 300);
-        tblStat.add(resultsDao.getStat(testResult));
+//        TestResult testResult;
+//        testResult = new TestResult();
+//        tblStat.setSize(300, 300);
+//        tblStat.add(resultsDao.getStat(testResult));
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import ru.erixon.quizdemo.Application;
-import ru.erixon.quizdemo.controller.database.dao.ResultsDao;
+import ru.erixon.quizdemo.controller.database.dao.ResultsDao_old;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.question.Question;
 import ru.erixon.quizdemo.model.results.TestResult;
@@ -116,9 +116,9 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
     }
 
     public void onClose() throws SQLException, IOException, ApplicationException {
-        ResultsDao resultsDao = new ResultsDao(Application.manager.getConnection());
+        ResultsDao_old resultsDaoOld = new ResultsDao_old(Application.manager.getConnection());
         TestResult testResult = new TestResult(student, LocalDateTime.now(),resultsTable);
-        resultsDao.insertResult(testResult);
+        resultsDaoOld.insertResult(testResult);
         ((Window) this.getFocusCycleRootAncestor()).dispose();
     }
 

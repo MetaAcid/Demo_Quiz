@@ -1,6 +1,6 @@
 package ru.erixon.quizdemo.model.exceptions;
 
-public class ApplicationException extends Exception {
+public class ApplicationException extends RuntimeException {
 
     public ApplicationException(String message, Throwable cause) {
         super(message, cause);
@@ -8,5 +8,9 @@ public class ApplicationException extends Exception {
 
     public ApplicationException(String message) {
         super(message);
+    }
+
+    public ApplicationException(Throwable cause) {
+        super(cause);
     }
 }
