@@ -24,7 +24,11 @@ public abstract class UserDao<T extends User> extends GenericDao<T> {
     public T getByLogin(String acctName, String passwordHash) throws SQLException, ApplicationException, IOException {
         String sql = String.format("select * from %s where account_name = ? and password_hash = ?", getTableFullName());
         ResultSet rs = executeSelect(sql, acctName, passwordHash);
-        return newEntity(rs);
+        if (rs.next()) {
+            return newEntity(rs);
+        }
+        throw new ApplicationException("empty set");
+
     }
 
     public boolean checkIfAccountExists(String acctName) throws SQLException, ApplicationException, IOException {
