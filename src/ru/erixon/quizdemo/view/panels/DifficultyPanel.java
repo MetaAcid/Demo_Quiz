@@ -30,7 +30,7 @@ public class DifficultyPanel extends Panel implements ActionListener {
 
     public DifficultyPanel(Student student) {
         this.setLayout(null);
-        this.student =student;
+        this.student = student;
         lblDifficulty.setBounds(xOff + 40, yOff, 400, 20);
         cbHard.setBounds(xOff + 100, yOff + 30, 100, 20);
         cbNormal.setBounds(xOff + 100, yOff + 60, 100, 20);
@@ -59,25 +59,16 @@ public class DifficultyPanel extends Panel implements ActionListener {
             return Question.Difficulty.EASY;
         } else if (cbHard.getState()) {
             return Question.Difficulty.HARD;
-        }
-         else throw new RuntimeException();
+        } else throw new RuntimeException();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            if (e.getSource().equals(btnNext)) {
-                List<Question> questions = questionDao.getQuestionsByParams(10, getChosenDifficulty());
-                QuizFrame frame = new QuizFrame((Window) this.getFocusCycleRootAncestor(), "Quiz", questions, this.student);
-            }
-        } catch (SQLException | IOException | ApplicationException ex) {
-            ex.printStackTrace();
+        if (e.getSource().equals(btnNext)) {
+            List<Question> questions = questionDao.getQuestionsByParams(10, getChosenDifficulty());
+            QuizFrame frame = new QuizFrame((Window) this.getFocusCycleRootAncestor(), "Quiz", questions, this.student);
         }
         this.validate();
         this.repaint();
-    }
-
-    private enum State {
-        TRUE, FALSE
     }
 }
