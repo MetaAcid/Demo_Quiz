@@ -22,7 +22,11 @@ public class StudentDao extends UserDao<Student> {
 
     @Override
     protected Student newEntity(ResultSet rs) throws ApplicationException {
-        return new Student(rs.getLong("id"),rs.getString("account_name"), rs.getString("name"), rs.getString("surname"), rs.getString("password_hash"), rs.getString("class_id"));
+        try {
+            return new Student(rs.getLong("id"),rs.getString("account_name"), rs.getString("name"), rs.getString("surname"), rs.getString("password_hash"), rs.getString("class_id"));
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
+        }
     }
 
     @Override

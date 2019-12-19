@@ -1,5 +1,6 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
+import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.user.Teacher;
 
 import java.sql.Connection;
@@ -25,7 +26,11 @@ public class TeacherDao extends UserDao<Teacher> {
 
 
     @Override
-    protected Teacher newEntity(ResultSet rs) throws SQLException {
-        return new Teacher(rs.getLong("id"),rs.getString("account_name"), rs.getString("name"), rs.getString("surname"), rs.getString("password_hash"));
+    protected Teacher newEntity(ResultSet rs)  throws ApplicationException {
+        try {
+            return new Teacher(rs.getLong("id"),rs.getString("account_name"), rs.getString("name"), rs.getString("surname"), rs.getString("password_hash"));
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
+        }
     }
 }

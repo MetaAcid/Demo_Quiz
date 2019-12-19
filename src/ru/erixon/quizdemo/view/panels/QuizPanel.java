@@ -117,8 +117,8 @@ public class QuizPanel extends BorderLayoutPanel implements ActionListener {
 
     public void onClose() throws SQLException, IOException, ApplicationException {
         ResultsDao_old resultsDaoOld = new ResultsDao_old(Application.manager.getConnection());
-        TestResult testResult = new TestResult(student, LocalDateTime.now(),resultsTable);
-        resultsDaoOld.insertResult(testResult);
+//        TestResult testResult = new TestResult(student, LocalDateTime.now(),resultsTable);
+//        resultsDaoOld.insertResult(testResult);
         ((Window) this.getFocusCycleRootAncestor()).dispose();
     }
 

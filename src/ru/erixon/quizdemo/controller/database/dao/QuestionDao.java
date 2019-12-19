@@ -1,5 +1,6 @@
 package ru.erixon.quizdemo.controller.database.dao;
 
+import ru.erixon.quizdemo.Application;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.question.Question;
 
@@ -24,29 +25,33 @@ public class QuestionDao extends GenericDao<Question> {
         super(connection);
     }
 
-    public List<Question> getQuestionsByParams(int qty, Question.Difficulty difficulty) throws SQLException, IOException, ApplicationException {
-        String sql = String.format("select * from %s where difficulty = ? order by random()", getTableFullName());
-        ResultSet rs = super.executeSelect(sql, difficulty.name());
-        List<Question> list = new ArrayList<>();
-        boolean b =  true;
-        while(qty > 0 && b){
-            list.add(this.newEntity(rs));
-            qty--;
-            b = rs.next();
+    public List<Question> getQuestionsByParams(int qty, Question.Difficulty difficulty) throws ApplicationException {
+        try {
+            String sql = String.format("select * from %s where difficulty = ? order by random()", getTableFullName());
+            ResultSet rs = super.executeSelect(sql, difficulty.name());
+            List<Question> list = new ArrayList<>();
+            boolean b =  true;
+            while(qty > 0 && b){
+                list.add(this.newEntity(rs));
+                qty--;
+                b = rs.next();
+            }
+            rs.close();
+            return list;
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
         }
-        rs.close();
-        return list;
     }
 
     @Override
-    protected Question newEntity(ResultSet rs) throws SQLException, ApplicationException {
+    protected Question newEntity(ResultSet rs) throws ApplicationException {
         try {
 
             InputStream stream = rs.getBinaryStream("image");
             BufferedImage image = ImageIO.read(stream);
             Question.Difficulty difficulty = Question.Difficulty.valueOf(rs.getString("difficulty"));
             return new Question(rs.getLong("id"), image,rs.getString("answer"), difficulty);
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             throw new ApplicationException("image reading error", e);
         }
     }
