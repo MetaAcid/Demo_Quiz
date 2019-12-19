@@ -44,7 +44,6 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         panel.add(lstClass);
         panel.add(lstStudent);
         this.add(panel, BorderLayout.NORTH);
-        this.add(tblStat, BorderLayout.CENTER);
     }
 
     private void initListStudent() {
@@ -79,5 +78,6 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
                 {"06/07/2018", "14", "15"}
         };
         tblStat = new JTable(data, headers);
+        this.add(tblStat, BorderLayout.CENTER);
     }
 }
