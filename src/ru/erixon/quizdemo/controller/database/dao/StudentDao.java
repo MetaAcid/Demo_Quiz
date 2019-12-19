@@ -53,10 +53,9 @@ public class StudentDao extends UserDao<Student> {
         String sql = String.format("select * from %s where class_id = ?;", getTableFullName());
         ResultSet rs = executeSelect(sql, classId);
         List<Student> studentList = new ArrayList<>();
-        do {
+        while (rs.next()) {
             studentList.add(newEntity(rs));
-        } while (rs.next());
-
+        }
         return studentList;
     }
 }
