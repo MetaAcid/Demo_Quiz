@@ -20,8 +20,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     private JComboBox lstClass = new JComboBox();
     private JComboBox lstStudent = new JComboBox();
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
-    ResultsDao_old resultsDaoOld = new ResultsDao_old(Application.manager.getConnection());
-    private JTable tblStat = new JTable(3,4);
+    private JTable tblStat = new JTable();
 
     public StudentChooseStatPanel(Teacher teacher) {
         initComponents();
@@ -49,11 +48,12 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     }
 
     private void initListStudent() {
+        lstStudent.addActionListener(this);
         List<Student> studentsByClass;
         lstStudent.removeAllItems();
         try {
             studentsByClass = studentDao.getStudentsByClass(lstClass.getSelectedItem().toString());
-            for (Student s: studentsByClass) {
+            for (Student s : studentsByClass) {
                 lstStudent.addItem(s.getName() + s.getSurname());
             }
         } catch (SQLException | IOException | ApplicationException e) {
@@ -66,16 +66,18 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         Object source = e.getSource();
         if (source.equals(lstClass)) {
             initListStudent();
-        }
-        else if (source.equals(lstStudent)){
+        } else if (source.equals(lstStudent)) {
             initTable();
         }
+        repaint();
     }
 
     private void initTable() {
-//        TestResult testResult;
-//        testResult = new TestResult();
-//        tblStat.setSize(300, 300);
-//        tblStat.add(resultsDao.getStat(testResult));
+        String[] headers = {"Date", "Score", "Number of Questions"};
+        String[][] data = {
+                {"01/01/2010", "10", "12"},
+                {"06/07/2018", "14", "15"}
+        };
+        tblStat = new JTable(data, headers);
     }
 }
