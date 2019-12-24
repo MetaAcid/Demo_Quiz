@@ -1,6 +1,8 @@
 package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.Application;
+import ru.erixon.quizdemo.controller.database.dao.ResultDetailsDao;
+import ru.erixon.quizdemo.controller.database.dao.ResultsDao;
 import ru.erixon.quizdemo.controller.database.dao.ResultsDao_old;
 import ru.erixon.quizdemo.controller.database.dao.StudentDao;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
@@ -17,9 +19,18 @@ import java.util.List;
 
 public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionListener {
 
-    private JComboBox lstClass = new JComboBox();
-    private JComboBox lstStudent = new JComboBox();
+    private JComboBox<String> lstClass = new JComboBox<>();
+    private JComboBox<Student> lstStudent = new JComboBox<>();
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
+    private ResultsDao resultsDao = new ResultsDao(Application.manager.getConnection());
+
+    private ListCellRenderer<Student> studentComboBoxRenderer = new ListCellRenderer<Student>() {
+        private DefaultListCellRenderer defaultListCellRenderer = new DefaultListCellRenderer();
+        @Override
+        public Component getListCellRendererComponent(JList<? extends Student> list, Student value, int index, boolean isSelected, boolean cellHasFocus) {
+            return defaultListCellRenderer.getListCellRendererComponent(list, value.getSurname(), index, isSelected, cellHasFocus);
+        }
+    };
     private JTable tblStat = new JTable();
 
     public StudentChooseStatPanel(Teacher teacher) {
@@ -50,10 +61,11 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         lstStudent.addActionListener(this);
         List<Student> studentsByClass;
         lstStudent.removeAllItems();
+        lstStudent.setRenderer(studentComboBoxRenderer);
         try {
             studentsByClass = studentDao.getStudentsByClass(lstClass.getSelectedItem().toString());
             for (Student s : studentsByClass) {
-                lstStudent.addItem(s.getName() + s.getSurname());
+                lstStudent.addItem(s);
             }
         } catch (SQLException | IOException | ApplicationException e) {
             throw new RuntimeException(e);
@@ -73,10 +85,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
 
     private void initTable() {
         String[] headers = {"Date", "Score", "Number of Questions"};
-        String[][] data = {
-                {"01/01/2010", "10", "12"},
-                {"06/07/2018", "14", "15"}
-        };
+        String[][] data = resultsDao.getStudentStatisticsData((Student) lstStudent.getSelectedItem());
         tblStat = new JTable(data, headers);
         this.add(tblStat, BorderLayout.CENTER);
     }
