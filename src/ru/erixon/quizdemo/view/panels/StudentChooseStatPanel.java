@@ -1,9 +1,7 @@
 package ru.erixon.quizdemo.view.panels;
 
 import ru.erixon.quizdemo.Application;
-import ru.erixon.quizdemo.controller.database.dao.ResultDetailsDao;
 import ru.erixon.quizdemo.controller.database.dao.ResultsDao;
-import ru.erixon.quizdemo.controller.database.dao.ResultsDao_old;
 import ru.erixon.quizdemo.controller.database.dao.StudentDao;
 import ru.erixon.quizdemo.model.exceptions.ApplicationException;
 import ru.erixon.quizdemo.model.user.Student;
@@ -23,7 +21,8 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
     private JComboBox<Student> lstStudent = new JComboBox<>();
     private StudentDao studentDao = new StudentDao(Application.manager.getConnection());
     private ResultsDao resultsDao = new ResultsDao(Application.manager.getConnection());
-
+    private Panel tablePanel = new Panel(new BorderLayout());
+    private String[] headers = {"Date", "Score", "Number of Questions"};
     private ListCellRenderer<Student> studentComboBoxRenderer = new ListCellRenderer<Student>() {
         private DefaultListCellRenderer defaultListCellRenderer = new DefaultListCellRenderer();
         @Override
@@ -31,7 +30,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
             return defaultListCellRenderer.getListCellRendererComponent(list, value.getSurname(), index, isSelected, cellHasFocus);
         }
     };
-    private JTable tblStat = new JTable();
+    private JTable tblStat;
 
     public StudentChooseStatPanel(Teacher teacher) {
         initComponents();
@@ -55,6 +54,7 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         panel.add(lstClass);
         panel.add(lstStudent);
         this.add(panel, BorderLayout.NORTH);
+        this.add(tablePanel, BorderLayout.CENTER);
     }
 
     private void initListStudent() {
@@ -78,15 +78,16 @@ public class StudentChooseStatPanel extends BorderLayoutPanel implements ActionL
         if (source.equals(lstClass)) {
             initListStudent();
         } else if (source.equals(lstStudent)) {
-            initTable();
+            refreshTable();
         }
         repaint();
     }
 
-    private void initTable() {
-        String[] headers = {"Date", "Score", "Number of Questions"};
+    private void refreshTable() {
+        tablePanel.removeAll();
         String[][] data = resultsDao.getStudentStatisticsData((Student) lstStudent.getSelectedItem());
         tblStat = new JTable(data, headers);
-        this.add(tblStat, BorderLayout.CENTER);
+        tablePanel.add(tblStat, BorderLayout.CENTER);
+        tablePanel.add(tblStat.getTableHeader(), BorderLayout.NORTH);
     }
 }
