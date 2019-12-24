@@ -4,7 +4,6 @@ import ru.artimenko.quizdemo.BaseFrame;
 import ru.erixon.quizdemo.model.user.Teacher;
 import ru.erixon.quizdemo.view.panels.StudentChooseStatPanel;
 import ru.erixon.quizdemo.view.panels.ClassStatPanel;
-import ru.erixon.quizdemo.view.panels.StudentSingleStatPanel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +13,6 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
 
     private ClassStatPanel classStatPanel = new ClassStatPanel();
     private StudentChooseStatPanel studentChooseStatPanel;
-    private StudentSingleStatPanel studentSingleStatPanel;
-    private Button btnClassStat = new Button("Class Statistics");
     private Button btnStudentStat = new Button("Student Statistics");
     private Panel pnlButtons = new Panel();
     private TeacherFrame.State state = TeacherFrame.State.INIT;
@@ -29,16 +26,13 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
         this.setResizable(false);
         this.setLayout(new BorderLayout());
         studentChooseStatPanel = new StudentChooseStatPanel(teacher);
-        studentSingleStatPanel = new StudentSingleStatPanel(teacher);
         initButtons();
         initPanels();
     }
 
     private void initButtons() {
-        btnClassStat.addActionListener(this);
         btnStudentStat.addActionListener(this);
         pnlButtons.add(btnStudentStat);
-        pnlButtons.add(btnClassStat);
     }
 
     private void initPanels() {
@@ -53,10 +47,7 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(btnClassStat)) {
-            changeMainPanel(classStatPanel);
-            state = State.CLASS_STAT;
-        } else if (e.getSource().equals(btnStudentStat)) {
+        if (e.getSource().equals(btnStudentStat)) {
             changeMainPanel(studentChooseStatPanel);
             state = State.CHOOSE_STUDENT_STAT;
             this.pnlMain.validate();
@@ -65,7 +56,7 @@ public class TeacherFrame extends BaseFrame implements ActionListener {
     }
 
     private enum State {
-        INIT, STUDENT_STAT, CLASS_STAT, CHOOSE_STUDENT_STAT
+        INIT, CHOOSE_STUDENT_STAT
     }
 
 }
