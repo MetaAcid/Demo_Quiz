@@ -30,11 +30,9 @@ public class QuestionDao extends GenericDao<Question> {
             String sql = String.format("select * from %s where difficulty = ? order by random()", getTableFullName());
             ResultSet rs = super.executeSelect(sql, difficulty.name());
             List<Question> list = new ArrayList<>();
-            boolean b =  true;
-            while(qty > 0 && b){
+            while(qty > 0 && rs.next()){
                 list.add(this.newEntity(rs));
                 qty--;
-                b = rs.next();
             }
             rs.close();
             return list;
