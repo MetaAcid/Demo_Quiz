@@ -31,7 +31,7 @@ public class ResultDetailsDao extends GenericDao<ResultDetail> {
 
     @Override
     protected String getTableName() {
-        return null;
+        return "test_results_details";
     }
 
     @Override
