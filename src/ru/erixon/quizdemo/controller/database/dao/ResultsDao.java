@@ -49,7 +49,7 @@ public class ResultsDao extends GenericDao<Result> {
         String sql = String.format(
                 "select r.test_date, sum(case when d.verdict = 1 then 1 else 0 end) as score, count(1) as cnt\n" +
                 "from %s r\n" +
-                "join %s d on (d.test_result_id = r.id)\n" +
+                "join %s d on (d.test_results_id = r.id)\n" +
                 "where r.student_id = ?\n" +
                 "group by r.id, r.test_date\n", this.getTableFullName(), resultDetailsDao.getTableFullName());
         ResultSet rs = executeSelect(sql, student.getId());
