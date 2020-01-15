@@ -40,7 +40,7 @@ public class ResultDetailsDao extends GenericDao<ResultDetail> {
     }
 
     public List<ResultDetail> findResultDetailsByResultId(long id) {
-        String sql = "select * from %s where test_result_id = ?;";
+        String sql = "select * from %s where test_results_id = ?;";
         ResultSet rs = executeSelect(sql, id);
         List<ResultDetail> resultDetails = new ArrayList<>();
         try {
